@@ -10,16 +10,16 @@ $operaciones = new Operaciones_Aritmeticas();
 $numero1 = $_GET['numero1'];
 $numero2 = $_GET['numero2'];
     $operacion = $_GET['operacion'];
-    if($operacion == 'suma'){
+    if($operacion == '1'){
        echo json_encode($operaciones->suma($numero1, $numero2));
     }
-    if($operacion == 'resta'){
+    if($operacion == '2'){
         echo json_encode( $operaciones->resta($numero1, $numero2));
     }
-    if($operacion == 'multiplicacion'){
+    if($operacion == '3'){
         echo json_encode( $operaciones->multiplicacion($numero1, $numero2));
     }
-    if($operacion == 'division'){
+    if($operacion == '4'){
         echo json_encode( $operaciones->division($numero1, $numero2));
     }
         
