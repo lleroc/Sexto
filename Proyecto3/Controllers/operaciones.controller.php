@@ -1,0 +1,28 @@
+<?php
+require_once('../Models/operaciones.model.php');
+$operaciones = new Operaciones_Aritmeticas();
+/**
+ * Metodo GET
+ * URL.   wwww.facebook.com?parametros=valores
+ * localhost/sexto/Proyecto3/views/index.view.php?operacion=suma&numero1=6&numero2=5
+ * localhost/sexto/Proyecto3/views/index.view.php?operacion=suma   & numero1=6  & numero2=5
+ */
+$numero1 = $_GET['numero1'];
+$numero2 = $_GET['numero2'];
+    $operacion = $_GET['operacion'];
+    if($operacion == 'suma'){
+       echo json_encode($operaciones->suma($numero1, $numero2));
+    }
+    if($operacion == 'resta'){
+        echo json_encode( $operaciones->resta($numero1, $numero2));
+    }
+    if($operacion == 'multiplicacion'){
+        echo json_encode( $operaciones->multiplicacion($numero1, $numero2));
+    }
+    if($operacion == 'division'){
+        echo json_encode( $operaciones->division($numero1, $numero2));
+    }
+        
+
+
+?>
