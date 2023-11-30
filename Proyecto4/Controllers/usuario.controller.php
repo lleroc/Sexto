@@ -14,7 +14,7 @@ switch ($_GET["op"]){
             $datos = $usuarios->login($correo, $contrasenia);
             $respuesta = mysqli_fetch_assoc($datos);
             if(empty($datos)){
-                header("Location:../login.php?op=2"); //no existe el usuario
+                header("Location:../login.php?op=2"); //el usuario o la contraseña son incorrectos
                 exit();
             }
             if(is_array($respuesta) and count($respuesta)>0){
@@ -23,7 +23,7 @@ switch ($_GET["op"]){
             }
         } catch (\Throwable $th) {
             echo json_encode($th->getMessage());
-            header("Location:../login.php?op=3"); // no se que error escribir
+            header("Location:../login.php?op=3"); // no se que error escribir  es para capturar un error de codigo
         }
         break;
    
