@@ -58,11 +58,11 @@
                   ?>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Correo</label>
-                    <input type="email" id="correo" name="correo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="email" id="correo" name="correo" class="form-control" aria-describedby="emailHelp">
                   </div>
                   <div class="mb-4">
                     <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                    <input type="password" id="contrasenia" name="contrasenia" class="form-control" id="exampleInputPassword1">
+                    <input type="password" id="contrasenia" name="contrasenia" class="form-control" >
                   </div>
                   <!--  <div class="d-flex align-items-center justify-content-between mb-4">
                     <div class="form-check">
