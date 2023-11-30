@@ -24,5 +24,7 @@ class Clase_Conectar_Base_Datos
         $this->db = mysqli_select_db($this->conexion, $this->dbname);
 
         if (!$this->db) die("Error en la seleccion de la base de datos" . mysqli_error($this->conexion));
+        return $this->conexion;
+
     }
 }
