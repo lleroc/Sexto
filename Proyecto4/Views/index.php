@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['UsuarioId']) and isset($_SESSION['Rol']) !="Administrador") {
+  header('Location: ../login.php');
+  exit();
+}
+?>
 <!doctype html>
 <html lang="es">
     <head>

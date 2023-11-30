@@ -16,9 +16,13 @@ switch ($_GET["op"]){
             if(is_array($respuesta) and count($respuesta)>0){  // comparar si la variable "respuesta" tiene datos y es un arreglo
                 //poner variables de session controlar accessos
                 //$respuesta -> trae toda la información del usuario
+                session_start();
                 if($contrasenia == $respuesta["Contrasenia"]){  //comparar la contraseña de la base con la contraseña que ingreso el usuario
                     $_SESSION['Nombres']  = $respuesta["Nombres"];
                     $_SESSION['Apellidos'] = $respuesta["Apellidos"];
+                    $_SESSION['Correo']    = $respuesta["Correo"];
+                    $_SESSION['Rol']       = $respuesta["Rol"];
+                    $_SESSION['UsuarioId']= $respuesta["UsuarioId"];
                     header("Location:../views/index.php");
                 }else{
                     header("Location:../login.php?op=2"); //el usuario o la contraseña son incorrectos
