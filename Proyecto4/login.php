@@ -40,7 +40,7 @@
                       ?>
                         <div class="mb-3">
                           <div class="alert alert-danger">
-                            Por favor ingrese sus datos
+                           El usuario no existe, por favor verifique sus datos
                           </div>
                         </div>
                       <?php

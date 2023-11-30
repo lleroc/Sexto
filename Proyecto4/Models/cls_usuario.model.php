@@ -8,6 +8,7 @@ class Clase_Usuarios
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
             $cadena = "SELECT * FROM `Usuarios` WHERE `Correo`= '$correo' and `Contrasenia`='$contrasenia'";
+
             $result = mysqli_query($con, $cadena);
             return $result;
         } catch (Throwable $th) {
