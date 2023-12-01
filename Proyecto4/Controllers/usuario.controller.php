@@ -27,7 +27,7 @@ switch ($_GET["op"]){
         $Rol = $_POST["Rol"];
 
         $datos = array(); //defino un arreglo
-        $datos = $usuarios->insertar($Cedula, $Nombres, $Apellidos, $Telefono, $Contrasenia, $Correo, $Rol); //llamo al modelo de usuarios e invoco al procedimiento insertar
+        $datos = $usuarios->insertar($Cedula, $Nombres, $Apellidos, $Telefono,$Correo, $Contrasenia,  $Rol); //llamo al modelo de usuarios e invoco al procedimiento insertar
         echo json_encode($datos); //devuelvo el arreglo en formato json
         break;
     case 'actualizar':
