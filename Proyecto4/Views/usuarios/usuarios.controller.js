@@ -89,4 +89,29 @@ var algoritmo_cedula = () => {
   
 }
 
+var cedula_repetida = () => {
+    var cedula = $('#Cedula').val();
+    var usuarios = new Usuarios_Model('',cedula,'','','','','','','cedula_repetida');
+    usuarios.cedula_repetida();
+}
+var verifica_correo = () => {
+    var Correo = $('#Correo').val();
+    var usuarios = new Usuarios_Model('','','','','',Correo,'','','verifica_correo');
+    usuarios.verifica_correo();
+}
+
+var verifica_contrasenias = ()=>{
+    var Contrasenia = $('#Contrasenia').val();
+    var Contrasenia2 = $('#Contrasenia2').val();
+    if(Contrasenia == Contrasenia2){
+        $('#errorContrasenia').addClass('d-none');
+        $('button').prop('disabled', false);
+    }else{
+        $('#errorContrasenia').removeClass('d-none');
+        $('#errorContrasenia').html('Las contraseñas no coinciden');
+        $('button').prop('disabled', true);
+    }
+
+}
+
 ;init();

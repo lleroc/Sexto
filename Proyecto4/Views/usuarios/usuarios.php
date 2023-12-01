@@ -61,9 +61,8 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="Cédula">Cédula</label>
-                        <input type="text" onfocusout="algoritmo_cedula()" required class="form-control" id="Cedula" name="Cedula" placeholder="Cédula">
+                        <input type="text" onfocusout="algoritmo_cedula();cedula_repetida();" required class="form-control" id="Cedula" name="Cedula" placeholder="Cédula">
                         <div class="alert alert-danger d-none" role="alert" id="errorCedula">
-
                         </div>
                         <div class="alert alert-danger d-none" role="alert" id="CedulaRepetida">
                         </div>
@@ -92,15 +91,21 @@
                     </div>
                     <div class="form-group">
                         <label for="Correo">Correo</label>
-                        <input type="text" required class="form-control" id="Correo" name="Correo" placeholder="Correo">
+                        <input type="text" required onfocusout="verifica_correo()" class="form-control" id="Correo" name="Correo" placeholder="Correo">
+                        <div class="alert alert-danger d-none" role="alert" id="CorreoRepetido">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="Contrasenia">Contraseña</label>
-                        <input type="password" required class="form-control" id="Contrasenia" name="Contrasenia" placeholder="Contrasenia">
+                        <input type="password" required onfocusout="verifica_contrasenias()" class="form-control" id="Contrasenia" name="Contrasenia" placeholder="Contrasenia">
+                        <div class="alert alert-danger d-none" role="alert" id="errorContrasenia">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="nombre">Repita su contraseña</label>
-                        <input type="password" required class="form-control" id="Contrasenia2" placeholder="Contrasenia2">
+                        <input type="password" required class="form-control" onfocusout="verifica_contrasenias()"  id="Contrasenia2" placeholder="Contrasenia2">
+                        <div class="alert alert-danger d-none" role="alert" id="errorContrasenia">
+                        </div>
                     </div>
 
                 </div>

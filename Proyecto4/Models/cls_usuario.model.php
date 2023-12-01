@@ -12,7 +12,7 @@ class Clase_Usuarios
             return $result;
         } catch (Throwable $th) {
             return $th->getMessage();
-        }finally{
+        } finally {
             $con->close();
         }
     }
@@ -26,7 +26,7 @@ class Clase_Usuarios
             return $result;
         } catch (Throwable $th) {
             return $th->getMessage();
-        }finally{
+        } finally {
             $con->close();
         }
     }
@@ -35,13 +35,13 @@ class Clase_Usuarios
         try {
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
-            $cadena = "INSERT INTO `Usuarios`(`Cedula`, `Nombres`, `Apellidos`, `Telefono`, `Correo`, `Contrasenia`, `Rol`) VALUES('$Cedula','$Nombres','$Apellidos','$Telefono','$Correo','$Contrasenia','$Rol')";            
+            $cadena = "INSERT INTO `Usuarios`(`Cedula`, `Nombres`, `Apellidos`, `Telefono`, `Correo`, `Contrasenia`, `Rol`) VALUES('$Cedula','$Nombres','$Apellidos','$Telefono','$Correo','$Contrasenia','$Rol')";
             //$cadena =sprintf("INSERT INTO `Usuarios`(`Cedula`, `Nombres`, `Apellidos`, `Telefono`, `Correo`, `Contrasenia`, `Rol`) VALUES('%s','%s','%s','%s','%s','%s','%s'",mysqli_real_escape_string($con,$Cedula));
             $result = mysqli_query($con, $cadena);
             return 'ok';
         } catch (Throwable $th) {
             return $th->getMessage();
-        }finally{
+        } finally {
             $con->close();
         }
     }
@@ -50,12 +50,12 @@ class Clase_Usuarios
         try {
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
-            $cadena = "UPDATE `Usuarios` SET `Cedula`='$Cedula',`Nombres`='$Nombres',`Apellidos`='$Apellidos',`Telefono`='$Telefono',`Correo`='$Correo',`Contrasenia`='$Contrasenia',`Rol`='$Rol' WHERE `UsuarioId`= $UsuarioId";            
+            $cadena = "UPDATE `Usuarios` SET `Cedula`='$Cedula',`Nombres`='$Nombres',`Apellidos`='$Apellidos',`Telefono`='$Telefono',`Correo`='$Correo',`Contrasenia`='$Contrasenia',`Rol`='$Rol' WHERE `UsuarioId`= $UsuarioId";
             $result = mysqli_query($con, $cadena);
             return "ok";
         } catch (Throwable $th) {
             return $th->getMessage();
-        }finally{
+        } finally {
             $con->close();
         }
     }
@@ -69,7 +69,7 @@ class Clase_Usuarios
             return "ok";
         } catch (Throwable $th) {
             return $th->getMessage();
-        }finally{
+        } finally {
             $con->close();
         }
     }
@@ -83,12 +83,39 @@ class Clase_Usuarios
             return "ok";
         } catch (Throwable $th) {
             return $th->getMessage();
-        }finally{
+        } finally {
             $con->close();
         }
     }
 
-
+    public function cedula_repetida($cedula)
+    {
+        try {
+            $con = new Clase_Conectar_Base_Datos();
+            $con = $con->ProcedimientoConectar();
+            $cadena = "SELECT count(*) as cedula_repetida FROM `Usuarios` WHERE `Cedula`= '$cedula'";
+            $result = mysqli_query($con, $cadena);
+            return $result;
+        } catch (Throwable $th) {
+            return $th->getMessage();
+        } finally {
+            $con->close();
+        }
+    }
+    public function verifica_correo($correo)
+    {
+        try {
+            $con = new Clase_Conectar_Base_Datos();
+            $con = $con->ProcedimientoConectar();
+            $cadena = "SELECT count(*) as cedula_repetida FROM `Usuarios` WHERE `correo`= '$correo'";
+            $result = mysqli_query($con, $cadena);
+            return $result;
+        } catch (Throwable $th) {
+            return $th->getMessage();
+        } finally {
+            $con->close();
+        }
+    }
     public function login($correo, $contrasenia)
     {
         try {
