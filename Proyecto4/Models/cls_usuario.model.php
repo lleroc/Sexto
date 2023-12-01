@@ -38,7 +38,7 @@ class Clase_Usuarios
             $cadena = "INSERT INTO `Usuarios`(`Cedula`, `Nombres`, `Apellidos`, `Telefono`, `Correo`, `Contrasenia`, `Rol`) VALUES('$Cedula','$Nombres','$Apellidos','$Telefono','$Correo','$Contrasenia','$Rol')";            
             //$cadena =sprintf("INSERT INTO `Usuarios`(`Cedula`, `Nombres`, `Apellidos`, `Telefono`, `Correo`, `Contrasenia`, `Rol`) VALUES('%s','%s','%s','%s','%s','%s','%s'",mysqli_real_escape_string($con,$Cedula));
             $result = mysqli_query($con, $cadena);
-            return $result;
+            return 'ok';
         } catch (Throwable $th) {
             return $th->getMessage();
         }finally{
@@ -52,7 +52,7 @@ class Clase_Usuarios
             $con = $con->ProcedimientoConectar();
             $cadena = "UPDATE `Usuarios` SET `Cedula`='$Cedula',`Nombres`='$Nombres',`Apellidos`='$Apellidos',`Telefono`='$Telefono',`Correo`='$Correo',`Contrasenia`='$Contrasenia',`Rol`='$Rol' WHERE `UsuarioId`= $UsuarioId";            
             $result = mysqli_query($con, $cadena);
-            return $result;
+            return "ok";
         } catch (Throwable $th) {
             return $th->getMessage();
         }finally{
@@ -66,7 +66,7 @@ class Clase_Usuarios
             $con = $con->ProcedimientoConectar();
             $cadena = "delete from usuarios where UsuarioId=$UsuarioId";
             $result = mysqli_query($con, $cadena);
-            return $result;
+            return "ok";
         } catch (Throwable $th) {
             return $th->getMessage();
         }finally{
@@ -80,7 +80,7 @@ class Clase_Usuarios
             $con = $con->ProcedimientoConectar();
             $cadena = "UPDATE `Usuarios` SET `Contrasenia`='$contrasenia' WHERE `UsuarioId`=$UsuarioId";
             $result = mysqli_query($con, $cadena);
-            return $result;
+            return "ok";
         } catch (Throwable $th) {
             return $th->getMessage();
         }finally{
