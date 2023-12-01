@@ -61,19 +61,24 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="Cédula">Cédula</label>
-                        <input type="text" class="form-control" id="Cedula" name="Cedula" placeholder="Cédula">
+                        <input type="text" onfocusout="algoritmo_cedula()" required class="form-control" id="Cedula" name="Cedula" placeholder="Cédula">
+                        <div class="alert alert-danger d-none" role="alert" id="errorCedula">
+
+                        </div>
+                        <div class="alert alert-danger d-none" role="alert" id="CedulaRepetida">
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="nombre">Nombres</label>
-                        <input type="text" class="form-control" id="Nombres" name="Nombres" placeholder="Nombres">
+                        <input type="text" required class="form-control" id="Nombres" name="Nombres" placeholder="Nombres">
                     </div>
                     <div class="form-group">
                         <label for="Apellidos">Apellidos</label>
-                        <input type="text" class="form-control" id="Apellidos" name="Apellidos" placeholder="Apellidos">
+                        <input type="text" required class="form-control" id="Apellidos" name="Apellidos" placeholder="Apellidos">
                     </div>
                     <div class="form-group">
                         <label for="Telefono">Teléfono</label>
-                        <input type="text" class="form-control" id="Telefono" name="Telefono"  placeholder="Telefono">
+                        <input type="text" required class="form-control" id="Telefono" name="Telefono" placeholder="Telefono">
                     </div>
                     <div class="form-group">
                         <label for="Rol">Rol</label>
@@ -87,15 +92,15 @@
                     </div>
                     <div class="form-group">
                         <label for="Correo">Correo</label>
-                        <input type="text" class="form-control" id="Correo" name="Correo" placeholder="Correo">
+                        <input type="text" required class="form-control" id="Correo" name="Correo" placeholder="Correo">
                     </div>
                     <div class="form-group">
                         <label for="Contrasenia">Contraseña</label>
-                        <input type="password" class="form-control" id="Contrasenia" name="Contrasenia" placeholder="Contrasenia">
+                        <input type="password" required class="form-control" id="Contrasenia" name="Contrasenia" placeholder="Contrasenia">
                     </div>
                     <div class="form-group">
                         <label for="nombre">Repita su contraseña</label>
-                        <input type="password" class="form-control" id="Contrasenia2" placeholder="Contrasenia2">
+                        <input type="password" required class="form-control" id="Contrasenia2" placeholder="Contrasenia2">
                     </div>
 
                 </div>
