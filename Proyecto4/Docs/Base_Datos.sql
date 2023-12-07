@@ -1,4 +1,5 @@
 
+
 --
 -- Base de datos: `Sexto`
 --
@@ -14,6 +15,33 @@ CREATE TABLE `Pais` (
   `Nombre` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `Pais`
+--
+
+INSERT INTO `Pais` (`PaisId`, `Nombre`) VALUES
+(1, 'ECUADOR'),
+(8, 'Colombia'),
+(9, 'PERU');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Productos`
+--
+
+CREATE TABLE `Productos` (
+  `ProductoId` int(11) NOT NULL,
+  `Nombre` text NOT NULL,
+  `Precio_Compra` decimal(8,2) NOT NULL,
+  `Precio_Venta` decimal(8,2) NOT NULL,
+  `Iva` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `Unidad_Medida` text NOT NULL,
+  `Imagen` text NOT NULL,
+  `Fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- --------------------------------------------------------
 
 --
@@ -25,6 +53,13 @@ CREATE TABLE `Provincias` (
   `Nombre` text NOT NULL,
   `PaisesId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `Provincias`
+--
+
+INSERT INTO `Provincias` (`ProvinciasId`, `Nombre`, `PaisesId`) VALUES
+(1, 'Tungurahua', 1);
 
 -- --------------------------------------------------------
 
@@ -63,6 +98,12 @@ ALTER TABLE `Pais`
   ADD PRIMARY KEY (`PaisId`);
 
 --
+-- Indices de la tabla `Productos`
+--
+ALTER TABLE `Productos`
+  ADD PRIMARY KEY (`ProductoId`);
+
+--
 -- Indices de la tabla `Provincias`
 --
 ALTER TABLE `Provincias`
@@ -83,19 +124,25 @@ ALTER TABLE `Usuarios`
 -- AUTO_INCREMENT de la tabla `Pais`
 --
 ALTER TABLE `Pais`
-  MODIFY `PaisId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PaisId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `Productos`
+--
+ALTER TABLE `Productos`
+  MODIFY `ProductoId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `Provincias`
 --
 ALTER TABLE `Provincias`
-  MODIFY `ProvinciasId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ProvinciasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `Usuarios`
 --
 ALTER TABLE `Usuarios`
-  MODIFY `UsuarioId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `UsuarioId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
