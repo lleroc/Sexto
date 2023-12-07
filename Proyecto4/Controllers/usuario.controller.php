@@ -48,7 +48,7 @@ switch ($_GET["op"]) {
         $UsuarioId = $_POST["UsuarioId"]; //defino una variable para almacenar el id del usuario, la variable se obtiene mediante POST
         $datos = array(); //defino un arreglo
         $datos = $usuarios->eliminar($UsuarioId); //llamo al modelo de usuarios e invoco al procedimiento uno y almaceno en una variable
-        echo json_encode($uno); //devuelvo el arreglo en formato json
+        echo json_encode($datos); //devuelvo el arreglo en formato json
         break;
     case 'actualizar_contrasenia':
         $UsuarioId = $_POST["UsuarioId"];
