@@ -37,11 +37,11 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="clientes/clientes.php" aria-expanded="false">
+              <a class="sidebar-link" href="paises/paises.php" target="base" aria-expanded="false">
                 <span>
                   <i class="ti ti-alert-circle"></i>
                 </span>
-                <span class="hide-menu">Alerts</span>
+                <span class="hide-menu">Paises</span>
               </a>
             </li>
             <li class="sidebar-item">
