@@ -1,5 +1,5 @@
 <?php
-require_once('../Models/cls_provincias.models.php');
+require_once('../Models/cls_provincias.model.php');
 $provincias = new Clase_Provincias;
 switch ($_GET["op"]) {
     case 'todos':

@@ -7,7 +7,7 @@ class Clase_Provincias
         try {
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
-            $cadena = "SELECT * FROM `Provincias`";
+            $cadena = "SELECT Provincias.ProvinciasId, Provincias.Nombre, Pais.Nombre as pais FROM `Provincias` inner JOIN Pais on Pais.PaisId = Provincias.PaisesId";
             $result = mysqli_query($con, $cadena);
             return $result;
         } catch (Throwable $th) {

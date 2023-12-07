@@ -14,7 +14,6 @@ $().ready(()=>{
 var todos = () =>{
     var html = "";
     $.get("../../Controllers/paises.controller.php?op=todos", (res) => {
-        console.log(res);
       res = JSON.parse(res);
       $.each(res, (index, valor) => {
        
