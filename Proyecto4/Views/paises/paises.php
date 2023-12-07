@@ -1,8 +1,5 @@
 <?php require_once('../html/head2.php') ?>
 
-
-
-
 <div class="row">
 
     <div class="col-lg-8 d-flex align-items-stretch">

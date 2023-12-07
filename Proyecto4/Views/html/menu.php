@@ -45,7 +45,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="provincias/provincias.php" target="base" aria-expanded="false">
+              <a class="sidebar-link" href="provincias/provincias.php" target="base"  aria-expanded="false">
                 <span>
                   <i class="ti ti-cards"></i>
                 </span>
@@ -53,11 +53,11 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
+              <a class="sidebar-link" href="productos/productos.php" target="base" aria-expanded="false">
                 <span>
                   <i class="ti ti-file-description"></i>
                 </span>
-                <span class="hide-menu">Forms</span>
+                <span class="hide-menu">Productos</span>
               </a>
             </li>
             <li class="sidebar-item">
