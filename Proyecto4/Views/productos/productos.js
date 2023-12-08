@@ -22,13 +22,13 @@ var todos = ()=>{
             <td>${valor.Unidad_Medida}</td>
             <td>
             <button class='btn btn-success' onclick='editar(${
-              valor.PaisId
+              valor.ProductoId
             })'>Editar</button>
             <button class='btn btn-danger' onclick='eliminar(${
-              valor.PaisId
+              valor.ProductoId
             })'>Eliminar</button>
             <button class='btn btn-info' onclick='ver(${
-              valor.PaisId
+              valor.ProductoId
             })'>Ver</button>
             </td></tr>
                 `;
@@ -39,3 +39,51 @@ var todos = ()=>{
 
     })
 }
+
+
+var guardaryeditar=(e)=>{
+    e.preventDefault();
+    var dato = new FormData($("#frm_productos")[0]);
+    var ruta = '';
+    var ProductoId = document.getElementById("ProductoId").value
+    if(ProductoId > 0){
+     ruta = "../../Controllers/productos.controller.php?op=actualizar"
+    }else{
+        ruta = "../../Controllers/productos.controller.php?op=insertar"
+    }
+    $.ajax({
+        url: ruta,
+        type: "POST",
+        data: dato,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+          res = JSON.parse(res);
+          if (res == "ok") {
+            Swal.fire("Paises", "Registrado con éxito" , "success");
+            todos();
+            limpia_Cajas();
+          } else {
+            Swal.fire("usuarios", "Error al guardo, intente mas rtarde", "error");
+          }
+        },
+      });
+  }
+
+
+  var limpia_Cajas = ()=>{
+    document.getElementById("ProductoId").value = "";
+    document.getElementById("Nombre").value = "";
+    document.getElementById("Precio_Compra").value = "";
+    document.getElementById("Precio_Venta").value = "";
+    document.getElementById("Iva").value = "";
+    document.getElementById("cantidad").value = "";
+    document.getElementById("Unidad_Medida").value = "";
+    document.getElementById("Imagen").value = "";
+    document.getElementById("Fecha").value = "";
+
+    $("#Modal_producto").modal("hide");
+  
+  };
+
+  init();

@@ -86,7 +86,13 @@
 
                     <div class="form-group">
                         <label for="Iva">Iva</label>
-                        <input type="text" required class="form-control" id="Iva" name="Iva" placeholder="Ingrese el nombre del pais">
+                        <select name="Iva" id="Iva" class="form-control">
+                            <option value="0">0%</option>
+                            <option value="8">8%</option>
+                            <option value="12">12%</option>
+                            <option value="14">14%</option>
+                        </select>
+
                     </div>
 
                     <div class="form-group">
@@ -96,7 +102,13 @@
 
                     <div class="form-group">
                         <label for="Unidad_Medida">Unidad de Medida</label>
-                        <input type="text" required class="form-control" id="Unidad_Medida" name="Unidad_Medida" placeholder="Ingrese el nombre del pais">
+                        <select name="Unidad_Medida" id="Unidad_Medida" class="form-control">
+                            <option value="Libras">Libras</option>
+                            <option value="Litros">Litros</option>
+                            <option value="Kilos">Kilos</option>
+                            <option value="Unidad">Unidad</option>
+                        </select>
+                        
                     </div>
 
                     <div class="form-group">

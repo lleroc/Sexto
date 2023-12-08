@@ -42,12 +42,11 @@ class Clase_Productos
             if ($_FILES["Imagen"]["tmp_name"] != '') {
                 $extension = explode('.', $_FILES["Imagen"]["name"]); //split     osito.jpg     [osito , jpg]
                 $nuevo_nombre = $iultimoid . '.' . $extension[1]; //1.jpg
-                $destino = "../../Public/assets/images/products/" . $nuevo_nombre . ".jpg";
+                $destino = "../Public/assets/images/products/" . $nuevo_nombre;
                 move_uploaded_file($_FILES["Imagen"]["tmp_name"], $destino);
                 $produpdate = new Clase_Productos();
-                $produpdate->actualizarImagen($destino, $iultimoid);
+                $produpdate->actualizarImagen("../".$destino, $iultimoid);
             }
-
             return 'ok';
         } catch (Throwable $th) {
             return $th->getMessage();
