@@ -65,7 +65,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <input type="hidden" name="ProductoId" id="ProductoId">
+                    <input type="text" name="ProductoId" id="ProductoId">
 
 
                   
@@ -118,7 +118,8 @@
 
                     <div class="form-group">
                         <label for="Imagen">Imagen</label>
-                        <input type="file" required class="form-control" id="Imagen" name="Imagen" placeholder="Ingrese el nombre del pais">
+                        <img id="img_producto" name="img_producto"  class="card-img-top d-none" width="100" height="100"  alt="">
+                        <input type="file"  class="form-control" id="Imagen" name="Imagen" placeholder="Ingrese el nombre del pais">
                     </div>
                    
 
@@ -131,6 +132,38 @@
         </div>
     </div>
 </div>
+
+<!-- modal actualziar imagen -->
+<div class="modal fade" id="Modal_producto_imagen" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" id="frm_productos_imagen">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Productos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <input type="text" name="ProductoId2" id="ProductoId2">
+
+                    <div class="form-group">
+                        <label for="Imagen">Imagen</label>
+                        <img id="img_producto" name="img_producto"  class="card-img-top d-none" width="100" height="100"  alt="">
+                        <input type="file"  class="form-control" id="Imagen" name="Imagen" placeholder="Ingrese el nombre del pais">
+                    </div>
+                   
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Grabar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 <?php require_once('../html/script2.php') ?>
 
