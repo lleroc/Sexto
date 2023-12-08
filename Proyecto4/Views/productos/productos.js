@@ -9,12 +9,13 @@ $().ready(()=>{
 var todos = ()=>{
     var html = '';
     $.get("../../Controllers/productos.controller.php?op=todos",(res)=>{
-        res = JSON.parse(res);
         console.log(res);
+        res = JSON.parse(res);
+        
         $.each(res,(index, valor)=>{
             html+=`<tr>
             <td>${index + 1} </td>
-            <td><img src="${valor.Imagen}" class="card-img-top"><td>
+            <td><img src="${valor.Imagen}" class="card-img-top"></td>
             <td>${valor.Nombre}</td>
             <td>${valor.Precio_Venta}</td>
             <td>${valor.cantidad}</td>
@@ -33,6 +34,8 @@ var todos = ()=>{
                 `;
             
         })
+
+        $("#tabla_productos").html(html);
 
     })
 }

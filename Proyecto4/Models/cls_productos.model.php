@@ -36,15 +36,31 @@ class Clase_Productos
             $con = new Clase_Conectar_Base_Datos();
             $con = $con->ProcedimientoConectar();
             //$cadena = "INSERT INTO `Productos`( `Nombre`, `Precio_Compra`, `Precio_Venta`, `Iva`, `cantidad`, `Unidad_Medida`, `Imagen`, `Fecha`) VALUES ('$Nombre','$Precio_Compra','$Precio_Venta',$Iva,$cantidad,'$Unidad_Medida','$Imagen','$Fecha')";
-            $cadena = "INSERT INTO `Productos`( `Nombre`, `Precio_Compra`, `Precio_Venta`, `Iva`, `cantidad`, `Unidad_Medida`, `Imagen`, `Fecha`) VALUES ('$Nombre','$Precio_Compra','$Precio_Venta',$Iva,$cantidad,'$Unidad_Medida','$Imagen',CURDATE())";
-
+            $cadena = "INSERT INTO `Productos`( `Nombre`, `Precio_Compra`, `Precio_Venta`, `Iva`, `cantidad`, `Unidad_Medida`, `Imagen`, `Fecha`) VALUES ('$Nombre','$Precio_Compra','$Precio_Venta',$Iva,$cantidad,'$Unidad_Medida','',CURDATE())";
             $result = mysqli_query($con, $cadena);
+            $iultimoid = mysqli_insert_id($con);
+            if ($_FILES["Imagen"]["tmp_name"] != '') {
+                $extension = explode('.', $_FILES["Imagen"]["name"]); //split     osito.jpg     [osito , jpg]
+                $nuevo_nombre = $iultimoid . '.' . $extension[1]; //1.jpg
+                $destino = "../../Public/assets/images/products/" . $nuevo_nombre . ".jpg";
+                move_uploaded_file($_FILES["Imagen"]["tmp_name"], $destino);
+                $produpdate = new Clase_Productos();
+                $produpdate->actualizarImagen($destino, $iultimoid);
+            }
+
             return 'ok';
         } catch (Throwable $th) {
             return $th->getMessage();
         } finally {
             $con->close();
         }
+    }
+    public function actualizarImagen($destino, $iultimoid)
+    {
+        $con = new Clase_Conectar_Base_Datos();
+        $con = $con->ProcedimientoConectar();
+        $cadena = "UPDATE `Productos` SET `Imagen`='$destino' WHERE `ProductoId`=$iultimoid";
+        $result = mysqli_query($con, $cadena);
     }
     public function actualizar($ProductoId, $Nombre, $Precio_Compra, $Precio_Venta, $Iva, $cantidad, $Unidad_Medida, $Imagen, $Fecha)
     {
@@ -76,7 +92,4 @@ class Clase_Productos
             $con->close();
         }
     }
-
-
-
 }

@@ -39,7 +39,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="tabla_paises">
+                        <tbody id="tabla_productos">
 
                         </tbody>
                     </table>
