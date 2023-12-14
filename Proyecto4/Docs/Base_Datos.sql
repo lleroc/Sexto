@@ -83,9 +83,9 @@ CREATE TABLE `Usuarios` (
 --
 
 INSERT INTO `Usuarios` (`UsuarioId`, `Cedula`, `Nombres`, `Apellidos`, `Telefono`, `Correo`, `Contrasenia`, `Rol`) VALUES
-(1, '1803971371', 'Luis Antonio', 'Llerena Ocaña', '0987654321', 'lleroc1@gmail.com', '123', 'Administrador'),
-(2, '1234567890', 'Otro Luis', 'Otro Llerena', '0987654321', 'correo@gmail.com', '123', 'Vendedor'),
-(4, '1803971330', 'Luis Antonio', 'Llerena Ocaña', '0981030167', 'lleroc@gmail.com', '123', 'Administrador');
+(1, '1803971371', 'Luis Antonio', 'Llerena Ocaña', '0987654321', 'lleroc1@gmail.com', '202cb962ac59075b964b07152d234b70', 'Administrador'),
+
+COMMIT;
 
 --
 -- Índices para tablas volcadas
