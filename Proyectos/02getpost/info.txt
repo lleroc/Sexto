@@ -1,0 +1,8 @@
+url
+www.google.com?op=todos
+localhost/sexto/proyectos/02getpost/home.php?op=1
+Controlador
+$_GET["op"]
+//esto no mira el usuario
+$_POST["cedula"]
+
