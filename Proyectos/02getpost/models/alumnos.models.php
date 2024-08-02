@@ -25,6 +25,7 @@ class Alumnos
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
         $cadena = "INSERT INTO `alumnos`(`Nombre`, `Apellido`, `Edad`) VALUES('$Nombre','$Apellido',$Edad)";
+
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
