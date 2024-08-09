@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ProveedorService } from './Services/proveedor.service';
 import { Iproveedor } from './Interfaces/iproveedor';
-
+//import Swal from 'sweetalert2';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -16,14 +16,18 @@ export class AppComponent {
   listaProveedores: Iproveedor[] = [];
   constructor(private ServicioProveedor: ProveedorService) {}
   ngOnInit() {
-    this.ServicioProveedor.todos().subscribe(
-      (data) => {
-        this.listaProveedores = data;
-      }
-      /* {
-        next: (data: Iproveedor[]) => (this.listaProveedores = data),
-        error: (e) => console.log(e),
-      }*/
-    );
+    this.cargatabla();
+  }
+
+  cargatabla() {
+    this.ServicioProveedor.todos().subscribe((data) => {
+      this.listaProveedores = data;
+    });
+  }
+  eliminar(idProveedor: number) {
+    this.ServicioProveedor.eliminar(idProveedor).subscribe((data) => {
+      console.log(data);
+      this.cargatabla();
+    });
   }
 }

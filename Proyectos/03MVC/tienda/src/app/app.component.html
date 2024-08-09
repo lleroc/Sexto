@@ -84,11 +84,16 @@
           <td>{{ proveedor.Nombre_Empresa }}</td>
           <td>{{ proveedor.Contacto_Empresa }}</td>
           <td>{{ proveedor.Teleofno_Contacto }}</td>
+
           <td>
             <button type="button" class="btn btn-outline-success">
               Editar
             </button>
-            <button type="button" class="btn btn-outline-danger">
+            <button
+              (click)="eliminar(proveedor.idProveedores)"
+              type="button"
+              class="btn btn-outline-danger"
+            >
               Eliminar
             </button>
           </td>

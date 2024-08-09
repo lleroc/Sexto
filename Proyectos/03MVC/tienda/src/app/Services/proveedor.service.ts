@@ -15,6 +15,11 @@ export class ProveedorService {
   todos(): Observable<Iproveedor[]> {
     return this.lector.get<Iproveedor[]>(this.apiurl + 'todos');
   }
+  eliminar(idProveedor: number): Observable<number> {
+    const formData = new FormData();
+    formData.append('idProveedores', idProveedor.toString());
+    return this.lector.post<number>(this.apiurl + 'eliminar', formData);
+  }
 }
 /*
 
