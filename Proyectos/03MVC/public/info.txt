@@ -4,3 +4,9 @@ Angular
 pnpm
 -----
 Direcionar a la ruta dobnde quiero que se cree el proyecto
+
+--Proeycto Angular
+
+Servicios => Service  => ng g service Nombre_Servicio
+    HttpClient => controllers/proveedores.cotrollers.php?op=todos
+

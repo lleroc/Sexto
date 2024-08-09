@@ -77,7 +77,24 @@
           <th>Opciones</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody>
+        @for (proveedor of listaProveedores; track $index) {
+        <tr>
+          <td>{{ $index + 1 }}</td>
+          <td>{{ proveedor.Nombre_Empresa }}</td>
+          <td>{{ proveedor.Contacto_Empresa }}</td>
+          <td>{{ proveedor.Teleofno_Contacto }}</td>
+          <td>
+            <button type="button" class="btn btn-outline-success">
+              Editar
+            </button>
+            <button type="button" class="btn btn-outline-danger">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
     </table>
   </div>
 </main>
