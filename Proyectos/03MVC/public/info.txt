@@ -1,0 +1,6 @@
+Instalacion 
+NodeJs
+Angular
+pnpm
+-----
+Direcionar a la ruta dobnde quiero que se cree el proyecto
