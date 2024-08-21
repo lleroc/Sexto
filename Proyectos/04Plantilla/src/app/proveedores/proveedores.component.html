@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card cardTitle="Lista de Proveedores" blockClass="pc-component">
+      <div class="col-md-12 col-xl-8">
+        <h5 class="mb-3">
+          <a href="nuevoproveedor" class="btn btn-outline-dark">Nuevo Proveedor</a>
+        </h5>
+        <div class="card tbl-card">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nombre Empresa</th>
+                  <th>Telefono</th>
+                  <th class="text-end">Contacto_Empresa</th>
+                  <th class="text-end">Teleofno_Contacto</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (proveedor of listaProveedores; track $index) {
+                  <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ proveedor.Nombre_Empresa }}</td>
+                    <td>{{ proveedor.Contacto_Empresa }}</td>
+                    <td>{{ proveedor.Teleofno_Contacto }}</td>
+
+                    <td>
+                      <button type="button" class="btn btn-outline-success" [routerLink]="['/editarproveedor/', proveedor.idProveedores]">
+                        Editar
+                      </button>
+                      <button (click)="eliminar(proveedor.idProveedores)" type="button" class="btn btn-outline-danger">Eliminar</button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

@@ -21,7 +21,3 @@ export class ProveedorService {
     return this.lector.post<number>(this.apiurl + 'eliminar', formData);
   }
 }
-/*
-
-
-*/

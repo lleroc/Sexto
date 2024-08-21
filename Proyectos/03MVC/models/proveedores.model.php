@@ -48,6 +48,7 @@ class Provedores
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
             $cadena = "UPDATE `proveedores` SET `Nombre_Empresa`='$Nombre_Empresa',`Direccion`='$Direccion',`Telefono`='$Telefono',`Contacto_Empresa`='$Contacto_Empresa',`Teleofno_Contacto`='$Teleofno_Contacto' WHERE `idProveedores` = $idProveedores";
+
             if (mysqli_query($con, $cadena)) {
                 return $idProveedores;
             } else {
