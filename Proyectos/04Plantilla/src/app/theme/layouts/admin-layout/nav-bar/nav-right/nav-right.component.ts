@@ -70,7 +70,7 @@ export class NavRightComponent {
   profile = [
     {
       icon: 'edit',
-      title: 'Edit Profile'
+      title: 'Editar Perfil'
     },
     {
       icon: 'user',

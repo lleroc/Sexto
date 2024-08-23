@@ -43,6 +43,10 @@ const routes: Routes = [
       {
         path: 'editarproveedor/:id',
         loadComponent: () => import('./proveedores/nuevoproveedor/nuevoproveedor.component').then((m) => m.NuevoproveedorComponent)
+      },
+      {
+        path: 'clientes',
+        loadComponent: () => import('./clientes/clientes.component').then((m) => m.ClientesComponent)
       }
     ]
   },
