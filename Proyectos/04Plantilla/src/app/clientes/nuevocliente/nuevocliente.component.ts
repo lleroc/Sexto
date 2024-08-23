@@ -3,6 +3,8 @@ import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validatio
 import { ClientesService } from 'src/app/Services/clientes.service';
 import { ICliente } from 'src/app/Interfaces/icliente';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-nuevocliente',
   standalone: true,
@@ -21,7 +23,10 @@ export class NuevoclienteComponent {
   });
   idClientes = 0;
   titulo = 'Nuevo Cliente';
-  constructor(private clienteServicio: ClientesService) {}
+  constructor(
+    private clienteServicio: ClientesService,
+    private navegacion: Router
+  ) {}
 
   grabar() {
     let cliente: ICliente = {
@@ -32,7 +37,28 @@ export class NuevoclienteComponent {
       Cedula: this.frm_Cliente.controls['Cedula'].value,
       Correo: this.frm_Cliente.controls['Correo'].value
     };
-    console.log(cliente);
+
+    Swal.fire({
+      title: 'Clientes',
+      text: 'Desea gurdar al Cliente ' + this.frm_Cliente.controls['Nombres'].value,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#ffffff',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Grabar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.clienteServicio.insertar(cliente).subscribe((res: any) => {
+          Swal.fire({
+            title: 'Clientes',
+            text: res.mensaje,
+            icon: 'success'
+          });
+
+          this.navegacion.navigate(['/clientes']);
+        });
+      }
+    });
   }
 
   validadorCedulaEcuador(control: AbstractControl): ValidationErrors | null {
