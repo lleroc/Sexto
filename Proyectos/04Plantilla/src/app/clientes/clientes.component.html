@@ -3,7 +3,7 @@
     <app-card cardTitle="Lista de Proveedores" blockClass="pc-component">
       <div class="col-md-12 col-xl-8">
         <h5 class="mb-3">
-          <a href="" class="btn btn-outline-dark">Nuevo Cliente</a>
+          <a href="nuevocliente" class="btn btn-outline-dark">Nuevo Cliente</a>
         </h5>
         <div class="card tbl-card">
           <div class="table-responsive">
@@ -14,7 +14,6 @@
                   <th>Cedula</th>
                   <th>Nombres</th>
                   <th class="text-end">Correo</th>
-
                   <th></th>
                 </tr>
               </thead>
@@ -26,7 +25,9 @@
                     <td>{{ cliente.Nombres }}</td>
                     <td>{{ cliente.Correo }}</td>
                     <td>
-                      <button type="button" class="btn btn-outline-success" [routerLink]="['//', cliente.idClientes]">Editar</button>
+                      <button type="button" class="btn btn-outline-success" [routerLink]="['/editarcliente/', cliente.idClientes]">
+                        Editar
+                      </button>
                       <button (click)="eliminar(cliente.idClientes)" type="button" class="btn btn-outline-danger">Eliminar</button>
                     </td>
                   </tr>
