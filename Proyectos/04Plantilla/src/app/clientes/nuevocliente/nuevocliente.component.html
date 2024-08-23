@@ -15,7 +15,8 @@
           <input formControlName="Cedula" type="text" class="form-control" id="Cedula" placeholder="Ingrese la cedula Cedula" />
           <div *ngIf="frm_Cliente.get('Cedula').invalid && frm_Cliente.get('Cedula').touched">
             <small *ngIf="frm_Cliente.get('Cedula').hasError('required')" style="color: red">La cedula es requerida</small>
-            <small *ngIf="frm_Cliente.get('Cedula').hasError('minlength')" style="color: red">La cedula tiene 10 digitos</small>
+            <small *ngIf="frm_Cliente.get('Cedula').hasError('cedulaInvalida')" style="color: red">La cedula ingresa no es correcta</small>
+            <small *ngIf="frm_Cliente.get('Cedula').hasError('provincia')" style="color: red">La provincia no existe</small>
           </div>
         </div>
         <div class="form-group mb-3">
@@ -44,6 +45,7 @@
           <input type="email" formControlName="Correo" class="form-control" id="Correo" />
           <div *ngIf="frm_Cliente.get('Correo').invalid && frm_Cliente.get('Correo').touched">
             <small *ngIf="frm_Cliente.get('Correo').hasError('required')" style="color: red">El correo es requerido</small>
+            <small *ngIf="frm_Cliente.get('Correo').hasError('email')" style="color: red">Debe ingresar un correo valido</small>
           </div>
         </div>
         <div class="d-grid mt-3">
