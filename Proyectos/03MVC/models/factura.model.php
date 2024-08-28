@@ -31,6 +31,7 @@ class Factura
             $con = $con->ProcedimientoParaConectar();
             $cadena = "INSERT INTO `factura`(`Fecha`, `Sub_total`, `Sub_total_iva`, `Valor_IVA`, `Clientes_idClientes`) 
                        VALUES ('$Fecha', '$Sub_total', '$Sub_total_iva', '$Valor_IVA', '$Clientes_idClientes')";
+            //echo $cadena;
             if (mysqli_query($con, $cadena)) {
                 return $con->insert_id; // Return the inserted ID
             } else {

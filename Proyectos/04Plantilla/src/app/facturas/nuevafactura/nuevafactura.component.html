@@ -9,30 +9,65 @@
       </h3>
     </div>
     <div class="row">
-      <div class="form-group mb-3">
-        <label class="form-label" for="company">Empresa</label>
-        <input type="text" class="form-control" placeholder="Company" />
-      </div>
-      <div class="form-group mb-3">
-        <label class="form-label" for="emailAddress">Direccion</label>
-        <input type="email" class="form-control" id="emailAddress" placeholder="Email Address" />
-      </div>
-      <div class="form-group mb-3">
-        <label class="form-label" for="password">Telefono</label>
-        <input type="text" class="form-control" />
-      </div>
-      <div class="form-group mb-3">
-        <label class="form-label" for="emailAddress">Nombre de Contacto</label>
-        <input type="email" class="form-control" />
-      </div>
-      <div class="form-group mb-3">
-        <label class="form-label" for="password">Telefono de Contacto</label>
-        <input type="text" class="form-control" />
-      </div>
+      <form [formGroup]="frm_factura" novalidate (ngSubmit)="grabar()">
+        <div class="form-group mb-3">
+          <label class="form-label">Cliente</label>
+          <select class="form-control" (change)="cambio($event)">
+            <option>Seleccione una opcion</option>
+            @for (cliente of listaClientes; track $index) {
+              <option value="{{ cliente.idClientes }}">{{ cliente.Nombres }}</option>
+            }
+          </select>
+        </div>
 
-      <div class="d-grid mt-3">
-        <button type="button" (click)="grabar()" class="btn btn-primary">Create Account</button>
-      </div>
+        <div class="form-group mb-3">
+          <label class="form-label" for="password">Fecha</label>
+          <input type="date" class="form-control" formControlName="Fecha" />
+          @if (frm_factura.get('Fecha').invalid && frm_factura.get('Fecha').touched) {
+            <div>
+              @if (frm_factura.get('Fecha').hasError('required')) {
+                <small style="color: red">Los nombres son requeridos</small>
+              }
+            </div>
+          }
+        </div>
+        <div class="form-group mb-3">
+          <label class="form-label" for="Sub_total">Sub_total</label>
+          <input type="text" class="form-control" formControlName="Sub_total" (blur)="calculos()" />
+          @if (frm_factura.get('Sub_total').invalid && frm_factura.get('Sub_total').touched) {
+            <div>
+              @if (frm_factura.get('Sub_total').hasError('required')) {
+                <small style="color: red">Los nombres son requeridos</small>
+              }
+            </div>
+          }
+        </div>
+        <div class="form-group mb-3">
+          <label class="form-label" for="Sub_total_iva">Sub_total_iva</label>
+          <input type="text" class="form-control" formControlName="Sub_total_iva" />
+          @if (frm_factura.get('Sub_total_iva').invalid && frm_factura.get('Sub_total_iva').touched) {
+            <div>
+              @if (frm_factura.get('Sub_total_iva').hasError('required')) {
+                <small style="color: red">Los nombres son requeridos</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="form-label" for="Valor_IVA">Valor_IVA</label>
+          <input type="text" class="form-control" formControlName="Valor_IVA" readonly value="0.15" />
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="form-label" for="Sub_total_iva">Total a Pagar</label>
+          <input type="text" class="form-control" ngValue="total" readonly [value]="totalapagar" />
+        </div>
+
+        <div class="d-grid mt-3">
+          <button type="submit" class="btn btn-primary">Grabar factura</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

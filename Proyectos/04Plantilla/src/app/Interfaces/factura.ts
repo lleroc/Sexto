@@ -1,5 +1,5 @@
 export interface IFactura {
-  idFactura: number;
+  idFactura?: number;
   Fecha: string;
   Sub_total: number;
   Sub_total_iva: number;
@@ -7,6 +7,6 @@ export interface IFactura {
   Clientes_idClientes: number;
 
   //son solo para mostrar informacion
-  Nombres: string;
-  total: number;
+  Nombres?: string;
+  total?: number;
 }
