@@ -8,7 +8,7 @@ class Factura
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
-        $cadena = "SELECT * FROM `factura`";
+        $cadena = "SELECT * FROM `factura` INNER JOIN clientes on factura.Clientes_idClientes = clientes.idClientes";
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
@@ -18,7 +18,7 @@ class Factura
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
-        $cadena = "SELECT * FROM `factura` WHERE `idFactura` = $idFactura";
+        $cadena = "SELECT * FROM `factura` INNER JOIN clientes on factura.Clientes_idClientes = clientes.idClientes WHERE `idFactura` = $idFactura";
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
