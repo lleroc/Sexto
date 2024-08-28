@@ -88,13 +88,11 @@ export const NavigationItems: NavigationItem[] = [
       },
       {
         id: 'tabler',
-        title: 'Tabler',
+        title: 'Facturas',
         type: 'item',
         classes: 'nav-item',
-        url: 'https://ant.design/components/icon',
-        icon: 'ant-design',
-        target: true,
-        external: true
+        url: '/facturas',
+        icon: 'ant-design'
       }
     ]
   },

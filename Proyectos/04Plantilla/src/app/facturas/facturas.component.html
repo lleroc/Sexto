@@ -3,7 +3,7 @@
     <app-card cardTitle="Lista de Proveedores" blockClass="pc-component">
       <div class="col-md-12 col-xl-8">
         <h5 class="mb-3">
-          <a href="nuevocliente" class="btn btn-outline-dark">Nuevo Cliente</a>
+          <a href="nuevafactura" class="btn btn-outline-dark">Nuevo Factura</a>
         </h5>
         <div class="card tbl-card">
           <div class="table-responsive">
@@ -23,12 +23,12 @@
                     <td>{{ $index + 1 }}</td>
                     <td>000{{ factura.idFactura }}</td>
                     <td>{{ factura.Nombres }}</td>
-                    <td>{{ factura.Correo }}</td>
+                    <td>{{ factura.total }}</td>
                     <td>
-                      <button type="button" class="btn btn-outline-success" [routerLink]="['/editarcliente/', factura.idClientes]">
+                      <button type="button" class="btn btn-outline-success" [routerLink]="['/editarcliente/', factura.idFactura]">
                         Editar
                       </button>
-                      <button (click)="eliminar(factura.idClientes)" type="button" class="btn btn-outline-danger">Eliminar</button>
+                      <button (click)="eliminar(factura.idFactura)" type="button" class="btn btn-outline-danger">Eliminar</button>
                     </td>
                   </tr>
                 }

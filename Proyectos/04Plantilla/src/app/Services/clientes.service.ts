@@ -10,6 +10,13 @@ import { Observable } from 'rxjs';
 export class ClientesService {
   apiurl = 'http://localhost/sexto/Proyectos/03MVC/controllers/clientes.controller.php?op=';
   constructor(private lector: HttpClient) {}
+
+  buscar(texto: string): Observable<ICliente> {
+    const formData = new FormData();
+    formData.append('texto', texto);
+    return this.lector.post<ICliente>(this.apiurl + 'uno', formData);
+  }
+
   todos(): Observable<ICliente[]> {
     return this.lector.get<ICliente[]>(this.apiurl + 'todos');
   }

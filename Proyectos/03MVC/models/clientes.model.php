@@ -6,6 +6,16 @@ class Clientes
 {
     // TODO: Implementar los métodos de la clase
 
+
+    public function buscar($textp) // select * from clientes
+    {
+        $con = new ClaseConectar();
+        $con = $con->ProcedimientoParaConectar();
+        $cadena = "SELECT * FROM `clientes` where nombres='$textp'";
+        $datos = mysqli_query($con, $cadena);
+        $con->close();
+        return $datos;
+    }
     public function todos() // select * from clientes
     {
         $con = new ClaseConectar();
