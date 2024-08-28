@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { ClientesService } from 'src/app/Services/clientes.service';
 import { ICliente } from 'src/app/Interfaces/icliente';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-nuevocliente',
   standalone: true,
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './nuevocliente.component.html',
   styleUrl: './nuevocliente.component.scss'
 })
-export class NuevoclienteComponent {
+export class NuevoclienteComponent implements OnInit {
   frm_Cliente = new FormGroup({
     //idClientes: new FormControl(),
     Nombres: new FormControl('', Validators.required),
@@ -25,8 +25,38 @@ export class NuevoclienteComponent {
   titulo = 'Nuevo Cliente';
   constructor(
     private clienteServicio: ClientesService,
-    private navegacion: Router
+    private navegacion: Router,
+    private ruta: ActivatedRoute
   ) {}
+
+  ngOnInit(): void {
+    this.idClientes = parseInt(this.ruta.snapshot.paramMap.get('idCliente'));
+    if (this.idClientes > 0) {
+      this.clienteServicio.uno(this.idClientes).subscribe((uncliente) => {
+        this.frm_Cliente.controls['Nombres'].setValue(uncliente.Nombres);
+        this.frm_Cliente.controls['Direccion'].setValue(uncliente.Direccion);
+        this.frm_Cliente.controls['Telefono'].setValue(uncliente.Telefono);
+        this.frm_Cliente.controls['Cedula'].setValue(uncliente.Cedula);
+        this.frm_Cliente.controls['Correo'].setValue(uncliente.Correo);
+        /*this.frm_Cliente.setValue({
+          Nombres: uncliente.Nombres,
+          Direccion: uncliente.Direccion,
+          Telefono: uncliente.Telefono,
+          Cedula: uncliente.Cedula,
+          Correo: uncliente.Correo
+        });*/
+        /*this.frm_Cliente.patchValue({
+          Cedula: uncliente.Cedula,
+          Correo: uncliente.Correo,
+          Nombres: uncliente.Nombres,
+          Direccion: uncliente.Direccion,
+          Telefono: uncliente.Telefono
+        });*/
+
+        this.titulo = 'Editar Cliente';
+      });
+    }
+  }
 
   grabar() {
     let cliente: ICliente = {
@@ -43,20 +73,30 @@ export class NuevoclienteComponent {
       text: 'Desea gurdar al Cliente ' + this.frm_Cliente.controls['Nombres'].value,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#ffffff',
+      confirmButtonColor: '#f00',
       cancelButtonColor: '#3085d6',
       confirmButtonText: 'Grabar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.clienteServicio.insertar(cliente).subscribe((res: any) => {
-          Swal.fire({
-            title: 'Clientes',
-            text: res.mensaje,
-            icon: 'success'
+        if (this.idClientes > 0) {
+          this.clienteServicio.actualizar(cliente).subscribe((res: any) => {
+            Swal.fire({
+              title: 'Clientes',
+              text: res.mensaje,
+              icon: 'success'
+            });
+            this.navegacion.navigate(['/clientes']);
           });
-
-          this.navegacion.navigate(['/clientes']);
-        });
+        } else {
+          this.clienteServicio.insertar(cliente).subscribe((res: any) => {
+            Swal.fire({
+              title: 'Clientes',
+              text: res.mensaje,
+              icon: 'success'
+            });
+            this.navegacion.navigate(['/clientes']);
+          });
+        }
       }
     });
   }
