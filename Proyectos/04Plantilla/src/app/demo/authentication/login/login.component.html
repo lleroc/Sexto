@@ -10,24 +10,27 @@
             <h3 class="mb-0"><b>Login</b></h3>
             <a [routerLink]="['/register']" class="link-primary">Don't have an account?</a>
           </div>
-          <div class="form-group mb-3">
-            <label class="form-label" for="email">Email Address</label>
-            <input type="email" class="form-control" id="email" placeholder="Email Address" value="info@codedthemes.com" />
-          </div>
-          <div class="form-group mb-3">
-            <label class="form-label" for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password" value="123456789" />
-          </div>
-          <div class="d-flex mt-1 justify-content-between">
-            <div class="form-check">
-              <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
-              <label class="form-check-label text-muted" for="customCheckc1">Keep me sign in</label>
+          <form [formGroup]="frm_login" novalidate (submit)="login()">
+            <div class="form-group mb-3">
+              <label class="form-label" for="email">Email Address</label>
+              <input formControlName="nombre_usuario" type="email" class="form-control" id="email" placeholder="Email Address" />
             </div>
-            <h5 class="text-secondary f-w-400"><a href="javascript:">Forgot Password?</a></h5>
-          </div>
-          <div class="d-grid mt-4">
-            <button type="button" class="btn btn-primary">Login</button>
-          </div>
+            <div class="form-group mb-3">
+              <label class="form-label" for="password">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Password" formControlName="contrasenia" />
+            </div>
+            <div class="d-flex mt-1 justify-content-between">
+              <div class="form-check">
+                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
+                <label class="form-check-label text-muted" for="customCheckc1">Keep me sign in</label>
+              </div>
+              <h5 class="text-secondary f-w-400"><a href="javascript:">Forgot Password?</a></h5>
+            </div>
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </form>
+
           <div class="saprator mt-3">
             <span>Login with</span>
           </div>

@@ -15,12 +15,17 @@ export class UsuariosService {
     private navegacion: Router
   ) {}
   login(usuario: IUsuarios) {
-    return this.lector.post<IUsuarios>(this.apiurl + 'login', usuario).subscribe((respuesta) => {
+    let formData = new FormData();
+    formData.append('Nombre_Usuario', usuario.Nombre_Usuario);
+    formData.append('Contrasenia', usuario.Contrasenia);
+
+    return this.lector.post<IUsuarios>(this.apiurl + 'login', formData).subscribe((respuesta) => {
       if (respuesta) {
+        console.log(respuesta);
         //variables de entorno -- variables locales -- variables de sesion
-        sessionStorage.setItem('nombreUsuario', respuesta.nombreUsuario);
-        sessionStorage.setItem('rolesIdRoles', respuesta.rolesIdRoles.toString());
-        localStorage.setItem('rolesIdRoles', respuesta.rolesIdRoles.toString());
+        sessionStorage.setItem('nombreUsuario', respuesta.Nombre_Usuario);
+        sessionStorage.setItem('rolesIdRoles', respuesta.Roles_idRoles.toString());
+        localStorage.setItem('rolesIdRoles', respuesta.Roles_idRoles.toString());
         this.loggedIn.next(true);
         this.navegacion.navigate(['/dashboard/default']);
       }
