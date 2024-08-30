@@ -11,6 +11,8 @@ import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NuevoproveedorComponent } from './proveedores/nuevoproveedor/nuevoproveedor.component';
+import LoginComponent from './demo/authentication/login/login.component';
+import { DefaultComponent } from './demo/default/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [AppComponent],
