@@ -40,8 +40,8 @@ export class UsuariosService {
     return this.loggedIn.asObservable();
   }
   checkLoginStatus() {
-    const usuario = sessionStorage.getItem('nombreUsuario');
-    if (usuario) {
+    const usuario = sessionStorage.getItem('rolesIdRoles');
+    if (parseInt(usuario) > 0) {
       this.loggedIn.next(true);
     }
   }
