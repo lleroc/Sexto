@@ -82,7 +82,7 @@ switch ($_GET["op"]) {
         $contrasenia = $_POST["Contrasenia"];
         $result = $usuario->login($nombreUsuario, $contrasenia);
         if ($result) {
-            echo json_encode(["success" => true]);
+            echo json_encode($result);
         } else {
             echo json_encode(["success" => false, "error" => "Invalid credentials."]);
         }
