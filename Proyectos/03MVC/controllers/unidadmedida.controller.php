@@ -37,7 +37,7 @@ switch ($_GET["op"]) {
         break;
 
     case 'insertar': // Procedimiento para insertar una nueva unidad de medida
-        if (!isset($_POST["Nombre"]) || !isset($_POST["Descripcion"]) || !isset($_POST["Tipo"])) {
+        if (!isset($_POST["Descripcion"]) || !isset($_POST["Tipo"])) {
             echo json_encode(["error" => "Missing required parameters."]);
             exit();
         }
@@ -47,12 +47,12 @@ switch ($_GET["op"]) {
         $Tipo = $_POST["Tipo"];
 
         $datos = array();
-        $datos = $unidad->insertar($Nombre, $Descripcion, $Tipo);
+        $datos = $unidad->insertar($Descripcion, $Tipo);
         echo json_encode($datos);
         break;
 
     case 'actualizar': // Procedimiento para actualizar una unidad de medida existente
-        if (!isset($_POST["idUnidad"]) || !isset($_POST["Nombre"]) || !isset($_POST["Descripcion"]) || !isset($_POST["Tipo"])) {
+        if (!isset($_POST["idUnidad"]) || !isset($_POST["Descripcion"]) || !isset($_POST["Tipo"])) {
             echo json_encode(["error" => "Missing required parameters."]);
             exit();
         }
@@ -63,7 +63,7 @@ switch ($_GET["op"]) {
         $Tipo = $_POST["Tipo"];
 
         $datos = array();
-        $datos = $unidad->actualizar($idUnidad, $Nombre, $Descripcion, $Tipo);
+        $datos = $unidad->actualizar($idUnidad,  $Descripcion, $Tipo);
         echo json_encode($datos);
         break;
 

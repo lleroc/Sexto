@@ -18,19 +18,19 @@ class UnidadDeMedida
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
-        $cadena = "SELECT * FROM `unidad_medida` WHERE `idUnidad` = $idUnidad";
+        $cadena = "SELECT * FROM `unidad_medida` WHERE `idUnidad_Medida` = $idUnidad";
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
     }
 
-    public function insertar($Nombre, $Descripcion, $Tipo) // insert into unidad_medida (...) values (...)
+    public function insertar($Descripcion, $Tipo) // insert into unidad_medida (...) values (...)
     {
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
-            $cadena = "INSERT INTO `unidad_medida`(`Nombre`, `Descripcion`, `Tipo`) 
-                       VALUES ('$Nombre', '$Descripcion', '$Tipo')";
+            $cadena = "INSERT INTO `unidad_medida`( `Detalle`, `Tipo`) 
+                       VALUES ( '$Descripcion', '$Tipo')";
             if (mysqli_query($con, $cadena)) {
                 return $con->insert_id; // Retorna el ID insertado
             } else {
@@ -43,16 +43,16 @@ class UnidadDeMedida
         }
     }
 
-    public function actualizar($idUnidad, $Nombre, $Descripcion, $Tipo) // update unidad_medida set ... where id = $idUnidad
+    public function actualizar($idUnidad,  $Descripcion, $Tipo) // update unidad_medida set ... where id = $idUnidad
     {
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
             $cadena = "UPDATE `unidad_medida` SET 
-                       `Nombre`='$Nombre',
-                       `Descripcion`='$Descripcion',
+                      
+                       `Detalle`='$Descripcion',
                        `Tipo`='$Tipo'
-                       WHERE `idUnidad` = $idUnidad";
+                       WHERE `idUnidad_Medida` = $idUnidad";
             if (mysqli_query($con, $cadena)) {
                 return $idUnidad; // Retorna el ID actualizado
             } else {
@@ -70,7 +70,7 @@ class UnidadDeMedida
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
-            $cadena = "DELETE FROM `unidad_medida` WHERE `idUnidad`= $idUnidad";
+            $cadena = "DELETE FROM `unidad_medida` WHERE `idUnidad_Medida`= $idUnidad";
             if (mysqli_query($con, $cadena)) {
                 return 1; // Éxito
             } else {
