@@ -10,7 +10,7 @@ if ($method == "OPTIONS") {
 
 // Controlador de Unidad de Medida Tienda Cel@g
 
-require_once('../models/unidad_medida.model.php');
+require_once('../models/unidadmedida.model.php');
 error_reporting(0);
 $unidad = new UnidadDeMedida;
 

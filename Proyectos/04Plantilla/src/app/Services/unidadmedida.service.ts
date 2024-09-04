@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UnidadmedidaService {
-  apiurl = 'http://localhost/sexto/Proyectos/03MVC/controllers/unidad_medida.controller.php?op=';
+  apiurl = 'http://localhost/sexto/Proyectos/03MVC/controllers/unidadmedida.controller.php?op=';
 
   constructor(private lector: HttpClient) {}
 
