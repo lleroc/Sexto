@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateFn, GuardResult, MaybeAsync, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { UsuariosService } from '../Services/usuarios.service';
 import { map, Observable } from 'rxjs';
 
@@ -14,6 +14,7 @@ export class usuariosGuardGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     return this.usuarioService.isLoggedIn().pipe(
       map((loggedIn) => {
+        console.log(loggedIn);
         if (!loggedIn) {
           this.navegacion.navigate(['/login']);
           return false;
