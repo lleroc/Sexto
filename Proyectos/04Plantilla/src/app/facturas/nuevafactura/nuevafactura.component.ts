@@ -82,27 +82,18 @@ export class NuevafacturaComponent implements OnInit {
     let idCliente = objetoSleect.target.value;
     this.frm_factura.get('Clientes_idClientes')?.setValue(idCliente);
   }
-  editarFactura(idFactura: number) {
-    
-    this.facturaService.actualizar(this.facturaAEditar).subscribe(factura => {
-      // Handle successful retrieval
-      if (factura) {
-        // 2. (Optional) Open a modal or navigate to a dedicated edit page
-        // - If using a modal:
-        this.lector = factura; // Store invoice data for pre-filling
-        this.showModalEdit(); // Function to display the edit modal
-  
-        // - If navigating to a dedicated edit page:
-        // this.router.navigate(['/facturas/editar', idFactura]);
-        // Replace '/facturas/editar' with your actual edit route
-      } else {
-        // Handle error if invoice not found
-        Swal.fire('Error', 'La factura no se encontró.', 'error');
+  actualizar() {
+    const updatedFactura: IFactura = {
+      ...this.frm_factura,
+      ...this.frm_factura.value
+    };
+
+    this.facturaService.actualizar(updatedFactura).subscribe((respuesta) => {
+      if (parseInt(respuesta) > 0) {
+        alert('Factura actualizada');
+        this.navegacion.navigate(['/editarfactura']);
       }
     });
-  }
-  showModalEdit() {
-    throw new Error('Method not implemented.');
   }
   
 }

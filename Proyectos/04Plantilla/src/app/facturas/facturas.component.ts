@@ -43,5 +43,26 @@ export class FacturasComponent implements OnInit {
       }
     });
   }
+  editarFactura(idFactura: number) {
+    // 1. Get the invoice details for pre-filling the edit form
+    this.facturaServicio.uno(idFactura).subscribe(factura => {
+      // Handle successful retrieval
+      if (factura) {
+        // 2. (Optional) Open a modal or navigate to a dedicated edit page
+        // - If using a modal:
+        this.facturaAEditar = factura; // Store invoice data for pre-filling
+        this.showModalEdit(); // Function to display the edit modal
   
+        // - If navigating to a dedicated edit page:
+        // this.router.navigate(['/facturas/editar', idFactura]);
+        // Replace '/facturas/editar' with your actual edit route
+      } else {
+        // Handle error if invoice not found
+        Swal.fire('Error', 'La factura no se encontró.', 'error');
+      }
+    });
+  }
+  showModalEdit() {
+    throw new Error('Method not implemented.');
+  }
 }
