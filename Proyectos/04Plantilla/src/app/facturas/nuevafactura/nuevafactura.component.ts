@@ -5,6 +5,7 @@ import { IFactura } from 'src/app/Interfaces/factura';
 import { ICliente } from 'src/app/Interfaces/icliente';
 import { ClientesService } from 'src/app/Services/clientes.service';
 import { FacturaService } from 'src/app/Services/factura.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nuevafactura',
@@ -21,6 +22,8 @@ export class NuevafacturaComponent implements OnInit {
   totalapagar: number = 0;
   //formgroup
   frm_factura: FormGroup;
+  facturaAEditar: IFactura;
+  lector: string;
 
   ///////
   constructor(
@@ -56,12 +59,14 @@ export class NuevafacturaComponent implements OnInit {
       Sub_total_iva: this.frm_factura.get('Sub_total_iva')?.value,
       Valor_IVA: this.frm_factura.get('Valor_IVA')?.value,
       Clientes_idClientes: this.frm_factura.get('Clientes_idClientes')?.value
+      
     };
 
     this.facturaService.insertar(factura).subscribe((respuesta) => {
       if (parseInt(respuesta) > 0) {
         alert('Factura grabada');
         this.navegacion.navigate(['/facturas']);
+        
       }
     });
   }
@@ -77,4 +82,27 @@ export class NuevafacturaComponent implements OnInit {
     let idCliente = objetoSleect.target.value;
     this.frm_factura.get('Clientes_idClientes')?.setValue(idCliente);
   }
+  editarFactura(idFactura: number) {
+    
+    this.facturaService.actualizar(this.facturaAEditar).subscribe(factura => {
+      // Handle successful retrieval
+      if (factura) {
+        // 2. (Optional) Open a modal or navigate to a dedicated edit page
+        // - If using a modal:
+        this.lector = factura; // Store invoice data for pre-filling
+        this.showModalEdit(); // Function to display the edit modal
+  
+        // - If navigating to a dedicated edit page:
+        // this.router.navigate(['/facturas/editar', idFactura]);
+        // Replace '/facturas/editar' with your actual edit route
+      } else {
+        // Handle error if invoice not found
+        Swal.fire('Error', 'La factura no se encontró.', 'error');
+      }
+    });
+  }
+  showModalEdit() {
+    throw new Error('Method not implemented.');
+  }
+  
 }
