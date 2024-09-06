@@ -21,15 +21,19 @@ export class UsuariosService {
     formData.append('Nombre_Usuario', usuario.Nombre_Usuario);
     formData.append('Contrasenia', usuario.Contrasenia);
 
-    return this.lector.post<IUsuarios>(this.apiurl + 'login', formData).subscribe((respuesta) => {
-      if (respuesta) {
+    return this.lector.post<any>(this.apiurl + 'login', formData).subscribe((respuesta) => {
+      if (respuesta.success == 'true' || respuesta.idUsuarios > 0) {
         console.log(respuesta);
         //variables de entorno -- variables locales -- variables de sesion
+
         sessionStorage.setItem('nombreUsuario', respuesta.Nombre_Usuario);
         sessionStorage.setItem('rolesIdRoles', respuesta.Roles_idRoles.toString());
         localStorage.setItem('rolesIdRoles', respuesta.Roles_idRoles.toString());
         this.loggedIn.next(true);
         this.navegacion.navigate(['/dashboard/default']);
+      } else {
+        console.log(respuesta);
+        this.navegacion.navigate(['/login/' + respuesta.error]);
       }
     });
   }

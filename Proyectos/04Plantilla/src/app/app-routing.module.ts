@@ -105,6 +105,10 @@ const routes: Routes = [
         loadComponent: () => import('./demo/authentication/login/login.component')
       },
       {
+        path: 'login/:id',
+        loadComponent: () => import('./demo/authentication/login/login.component')
+      },
+      {
         path: 'register',
         loadComponent: () => import('./demo/authentication/register/register.component')
       }

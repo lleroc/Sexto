@@ -31,20 +31,11 @@
             </div>
           </form>
 
-          <div class="saprator mt-3">
-            <span>Login with</span>
-          </div>
+          <div class="saprator mt-3"></div>
           <div class="row">
-            @for (item of SignInOptions; track item) {
-              <div class="col-4">
-                <div class="d-grid">
-                  <button type="button" class="btn mt-2 btn-light-primary bg-light text-muted">
-                    <img src="{{ item.image }}" alt="google img" />
-                    <span class="d-none d-sm-inline-block">{{ item.name }}</span>
-                  </button>
-                </div>
-              </div>
-            }
+            <label for="" style="color: red" [ngStyle]="{ visibility: mensajeerror ? 'visible' : 'hidden' }">{{ mensajeerror }}</label>
+            <!-- <label for="" style="color: red" [ngClass]="{ visible: mensajeerror, invisible: !mensajeerror }">{{ mensajeerror }}</label>
+            <label for="" style="color: red" [hidden]="!mensajeerror">{{ mensajeerror }}</label>-->
           </div>
         </div>
       </div>
