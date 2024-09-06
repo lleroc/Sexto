@@ -8,10 +8,23 @@ class Producto
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
-        $cadena = "SELECT p.idProductos, p.Codigo_Barras, p.Nombre_Producto, p.Graba_IVA, u.Detalle as Unidad_Medida, i.Detalle as IVA_Detalle 
-                   FROM `Productos` p 
-                   INNER JOIN Unidad_Medida u ON p.idProductos = u.idUnidad_Medida 
-                   INNER JOIN IVA i ON p.Graba_IVA = i.idIVA";
+        $cadena = "SELECT p.idProductos, 
+       p.Codigo_Barras, 
+       p.Nombre_Producto, 
+       p.Graba_IVA, 
+       u.Detalle as Unidad_Medida, 
+       i.Detalle as IVA_Detalle, 
+       k.Cantidad, 
+       k.Fecha_Transaccion, 
+       k.Valor_Compra, 
+       k.Valor_Venta, 
+       k.Tipo_Transaccion
+FROM `Productos` p
+INNER JOIN `Unidad_Medida` u ON p.idProductos = u.idUnidad_Medida
+INNER JOIN `IVA` i ON p.Graba_IVA = i.idIVA
+INNER JOIN `Kardex` k ON p.idProductos = k.Productos_idProductos
+where k.`Estado` = 1
+";
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
@@ -90,7 +103,7 @@ class Producto
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
-            $cadena = "DELETE FROM `Productos` WHERE `idProductos`= $idProductos";
+            $cadena = "UPDATE `kardex` SET `Estado`=0 WHERE `Productos_idProductos`=$idProductos";
             if (mysqli_query($con, $cadena)) {
                 return 1; // Éxito
             } else {

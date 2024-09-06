@@ -10,7 +10,7 @@ if ($method == "OPTIONS") {
 
 // TODO: Controlador de productos con Kardex
 
-require_once('../models/producto.model.php');
+require_once('../models/productos.model.php');
 error_reporting(0);
 $producto = new Producto;
 
