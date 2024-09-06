@@ -1,0 +1,135 @@
+<div class="card my-5">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+      <h3 class="mb-0">
+        {{ titulo }}
+        <!--Interpolacion
+            sirve para enviar datos desde el .ts hacia el html
+          -->
+      </h3>
+    </div>
+    <form [formGroup]="frm_Producto" (ngSubmit)="grabar()">
+      <div class="row">
+        <div class="form-group mb-3">
+          <label class="form-label" for="Codigo_Barras">Código de Barras</label>
+          <input
+            formControlName="Codigo_Barras"
+            type="text"
+            class="form-control"
+            id="Codigo_Barras"
+            placeholder="Ingrese el código de barras"
+          />
+          <div *ngIf="frm_Producto.get('Codigo_Barras').invalid && frm_Producto.get('Codigo_Barras').touched">
+            <small *ngIf="frm_Producto.get('Codigo_Barras').hasError('required')" style="color: red">
+              El código de barras es requerido
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="form-label" for="Nombre_Producto">Nombre del Producto</label>
+          <input
+            formControlName="Nombre_Producto"
+            type="text"
+            class="form-control"
+            id="Nombre_Producto"
+            placeholder="Ingrese el nombre del producto"
+          />
+          <div *ngIf="frm_Producto.get('Nombre_Producto').invalid && frm_Producto.get('Nombre_Producto').touched">
+            <small *ngIf="frm_Producto.get('Nombre_Producto').hasError('required')" style="color: red">
+              El nombre del producto es requerido
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="form-label" for="Graba_IVA">Graba IVA</label>
+          <select formControlName="Graba_IVA" class="form-control" id="Graba_IVA">
+            <option value="1">Sí</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="form-label" for="Unidad_Medida_idUnidad_Medida">Unidad de Medida</label>
+          <select formControlName="Unidad_Medida_idUnidad_Medida" class="form-control" id="Unidad_Medida_idUnidad_Medida">
+            <option *ngFor="let unidad of unidadesMedida" [value]="unidad.idUnidad_Medida">
+              {{ unidad.Detalle }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="form-label" for="IVA_idIVA">IVA</label>
+          <select formControlName="IVA_idIVA" class="form-control" id="IVA_idIVA">
+            <option *ngFor="let iva of ivas" [value]="iva.idIVA">
+              {{ iva.Detalle }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="form-label" for="Cantidad">Cantidad</label>
+          <input type="number" formControlName="Cantidad" class="form-control" id="Cantidad" placeholder="Ingrese la cantidad" />
+          <div *ngIf="frm_Producto.get('Cantidad').invalid && frm_Producto.get('Cantidad').touched">
+            <small *ngIf="frm_Producto.get('Cantidad').hasError('required')" style="color: red">La cantidad es requerida</small>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="form-label" for="Valor_Compra">Valor de Compra</label>
+          <input
+            type="number"
+            formControlName="Valor_Compra"
+            class="form-control"
+            id="Valor_Compra"
+            placeholder="Ingrese el valor de compra"
+          />
+          <div *ngIf="frm_Producto.get('Valor_Compra').invalid && frm_Producto.get('Valor_Compra').touched">
+            <small *ngIf="frm_Producto.get('Valor_Compra').hasError('required')" style="color: red">El valor de compra es requerido</small>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="form-label" for="Valor_Venta">Valor de Venta</label>
+          <input
+            type="number"
+            formControlName="Valor_Venta"
+            class="form-control"
+            id="Valor_Venta"
+            placeholder="Ingrese el valor de venta"
+          />
+          <div *ngIf="frm_Producto.get('Valor_Venta').invalid && frm_Producto.get('Valor_Venta').touched">
+            <small *ngIf="frm_Producto.get('Valor_Venta').hasError('required')" style="color: red">El valor de venta es requerido</small>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label class="form-label" for="Proveedores_idProveedores">Proveedor</label>
+          <select formControlName="Proveedores_idProveedores" class="form-control" id="Proveedores_idProveedores">
+            <option *ngFor="let proveedor of proveedores" [value]="proveedor.idProveedores">
+              {{ proveedor.Nombre }}
+            </option>
+          </select>
+        </div>
+
+        <div class="d-grid mt-3">
+          <button type="submit" class="btn btn-primary" [disabled]="frm_Producto.invalid">Grabar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--
+    IMPORTAR => FORMSMODULE EN APP.MODULE.TS || NUEVOPRODUCTO.COMPONENT.TS
+    
+    INTERPOLACION => DESDE EL TS AL HTML
+    {{ }} 
+    EVENTOS => EJECUTAR FUNCIONES EN EL TS
+    ()
+    DATA BINDING => DESDE EL HTML AL TS
+    []
+    TWO WAY BINDING => ENVIADO DE DATOS DESDE EL HTML AL TS Y DESDE EL TS AL HTML
+    [()]
+  -->
