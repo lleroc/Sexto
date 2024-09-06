@@ -28,6 +28,14 @@ export class NuevoproductoComponent implements OnInit {
     this.proveedoreServicio.todos().subscribe((data) => (this.listaProveedores = data));
 
     this.crearFormulario();
+
+    /*
+1.- Modelo => Solo el procedieminto para realizar un select
+2.- Controador => Solo el procedieminto para realizar un select
+3.- Servicio => Solo el procedieminto para realizar un select
+4.-  realizar el insertar y actualizar
+
+*/
   }
 
   crearFormulario() {
