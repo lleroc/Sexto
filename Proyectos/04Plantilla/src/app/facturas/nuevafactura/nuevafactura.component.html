@@ -10,7 +10,7 @@
     </div>
     <div class="row">
       <form [formGroup]="frm_factura" novalidate (ngSubmit)="grabar()">
-        <div class="container mt-4">
+        <div class="container mt-4" id="impresion">
           <!-- Encabezado de la Factura -->
           <div class="row">
             <div class="col-6">
@@ -73,7 +73,13 @@
           <!-- Detalle de la Factura -->
           <div class="row">
             <div class="col-12">
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+              <button
+                type="button"
+                class="btn btn-primary noimprimir"
+                data-bs-toggle="modal"
+                data-bs-target="#addProductModal"
+                (click)="productosLista($event)"
+              >
                 Agregar Producto
               </button>
               <table class="table table-bordered">
@@ -88,22 +94,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Producto A</td>
-                    <td>2</td>
-                    <td>$10.00</td>
-                    <td>$20.00</td>
-                    <td>$2.40</td>
-                    <td>$22.40</td>
-                  </tr>
-                  <tr>
-                    <td>Producto B</td>
-                    <td>1</td>
-                    <td>$15.00</td>
-                    <td>$15.00</td>
-                    <td>$1.80</td>
-                    <td>$16.80</td>
-                  </tr>
+                  @for (item of productoelejido; track $index) {
+                    <tr>
+                      <td>{{ item.Descripcion }}</td>
+                      <td>{{ item.Cantidad }}</td>
+                      <td>{{ item.Precio | currency }}</td>
+                      <td>{{ item.Subtotal | currency }}</td>
+                      <td>{{ item.IVA | currency }}</td>
+                      <td>{{ item.Total | currency }}</td>
+                    </tr>
+                  }
                 </tbody>
                 <tfoot>
                   <tr>
@@ -192,8 +192,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <!-- Formulario para agregar producto (ngSubmit)="onSubmit(productForm)" -->
-        <form #productForm="ngForm">
+        <!-- Formulario para agregar producto " -->
+        <form #productForm="ngForm" (ngSubmit)="cargaModal(productForm)">
           <div class="mb-3">
             <label for="name" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="name" name="name" ngModel required />
@@ -202,10 +202,7 @@
             <label for="quantity" class="form-label">Cantidad</label>
             <input type="number" class="form-control" id="quantity" name="quantity" ngModel required />
           </div>
-          <div class="mb-3">
-            <label for="price" class="form-label">Precio Unitario</label>
-            <input type="number" class="form-control" id="price" name="price" ngModel required />
-          </div>
+
           <button type="submit" class="btn btn-primary" [disabled]="!productForm.form.valid">Agregar</button>
         </form>
       </div>
