@@ -73,6 +73,9 @@
           <!-- Detalle de la Factura -->
           <div class="row">
             <div class="col-12">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                Agregar Producto
+              </button>
               <table class="table table-bordered">
                 <thead class="table-light">
                   <tr>
@@ -177,6 +180,35 @@
           <button type="submit" class="btn btn-primary">Grabar factura</button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addProductModalLabel">Agregar Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulario para agregar producto (ngSubmit)="onSubmit(productForm)" -->
+        <form #productForm="ngForm">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" name="name" ngModel required />
+          </div>
+          <div class="mb-3">
+            <label for="quantity" class="form-label">Cantidad</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" ngModel required />
+          </div>
+          <div class="mb-3">
+            <label for="price" class="form-label">Precio Unitario</label>
+            <input type="number" class="form-control" id="price" name="price" ngModel required />
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!productForm.form.valid">Agregar</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
