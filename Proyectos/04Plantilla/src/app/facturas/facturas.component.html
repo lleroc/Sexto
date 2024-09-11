@@ -25,7 +25,7 @@
                     <td>{{ factura.Nombres }}</td>
                     <td>{{ factura.total }}</td>
                     <td>
-                      <button type="button" class="btn btn-outline-success" [routerLink]="['/editarcliente/', factura.idFactura]">
+                      <button type="button" class="btn btn-outline-success" [routerLink]="['/editarfactura/', factura.idFactura]">
                         Editar
                       </button>
                       <button (click)="eliminar(factura.idFactura)" type="button" class="btn btn-outline-danger">Eliminar</button>

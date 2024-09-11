@@ -5,6 +5,7 @@ import { IFactura } from 'src/app/Interfaces/factura';
 import { ICliente } from 'src/app/Interfaces/icliente';
 import { ClientesService } from 'src/app/Services/clientes.service';
 import { FacturaService } from 'src/app/Services/factura.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nuevafactura',
@@ -21,6 +22,8 @@ export class NuevafacturaComponent implements OnInit {
   totalapagar: number = 0;
   //formgroup
   frm_factura: FormGroup;
+  facturaAEditar: IFactura;
+  lector: string;
 
   ///////
   constructor(
@@ -56,12 +59,14 @@ export class NuevafacturaComponent implements OnInit {
       Sub_total_iva: this.frm_factura.get('Sub_total_iva')?.value,
       Valor_IVA: this.frm_factura.get('Valor_IVA')?.value,
       Clientes_idClientes: this.frm_factura.get('Clientes_idClientes')?.value
+      
     };
 
     this.facturaService.insertar(factura).subscribe((respuesta) => {
       if (parseInt(respuesta) > 0) {
         alert('Factura grabada');
         this.navegacion.navigate(['/facturas']);
+        
       }
     });
   }
@@ -77,4 +82,18 @@ export class NuevafacturaComponent implements OnInit {
     let idCliente = objetoSleect.target.value;
     this.frm_factura.get('Clientes_idClientes')?.setValue(idCliente);
   }
+  actualizar() {
+    const updatedFactura: IFactura = {
+      ...this.frm_factura,
+      ...this.frm_factura.value
+    };
+
+    this.facturaService.actualizar(updatedFactura).subscribe((respuesta) => {
+      if (parseInt(respuesta) > 0) {
+        alert('Factura actualizada');
+        this.navegacion.navigate(['/editarfactura']);
+      }
+    });
+  }
+  
 }

@@ -7,6 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UnidadmedidaService {
+  recuperarPorId(idUnidad_Medida: number) {
+    throw new Error('Method not implemented.');
+  }
+  append(idUnidad_Medida: number) {
+    throw new Error('Method not implemented.');
+  }
   apiurl = 'http://localhost/sexto/Proyectos/03MVC/controllers/unidadmedida.controller.php?op=';
 
   constructor(private lector: HttpClient) {}
@@ -41,4 +47,5 @@ export class UnidadmedidaService {
     formData.append('Tipo', unidad.Tipo.toString());
     return this.lector.post<string>(this.apiurl + 'actualizar', formData);
   }
+  
 }
