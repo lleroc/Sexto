@@ -7,6 +7,12 @@ import { IFactura } from 'src/app/Interfaces/factura';
 import { ICliente } from 'src/app/Interfaces/icliente';
 import { ClientesService } from 'src/app/Services/clientes.service';
 import { FacturaService } from 'src/app/Services/factura.service';
+import jsPDF from 'jspdf';
+//import 'jspdf-autotable';
+//import html2canvas from 'html2canvas';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-nuevafactura',
@@ -23,6 +29,32 @@ export class NuevafacturaComponent implements OnInit {
   totalapagar: number = 0;
   //formgroup
   frm_factura: FormGroup;
+  productoelejido: any[] = [
+    {
+      Descripcion: 'Producto 1',
+      Cantidad: 2,
+      Precio: 1000,
+      Subtotal: 2000,
+      IVA: 12,
+      Total: 2000
+    },
+    {
+      Descripcion: 'Producto 2',
+      Cantidad: 2,
+      Precio: 1000,
+      Subtotal: 2000,
+      IVA: 12,
+      Total: 2000
+    },
+    {
+      Descripcion: 'Producto 3',
+      Cantidad: 2,
+      Precio: 1000,
+      Subtotal: 2000,
+      IVA: 12,
+      Total: 2000
+    }
+  ];
 
   ///////
   constructor(
@@ -53,7 +85,8 @@ export class NuevafacturaComponent implements OnInit {
   }
 
   grabar() {
-    //PDF CON PDF MAKER
+
+    //PDF CON PDFMAKER
     const DATA: any = {
       content: [
         {
@@ -61,28 +94,43 @@ export class NuevafacturaComponent implements OnInit {
           style: 'header',
         },
         {
-          text: 'Fecha: ' + this.frm_factura.get('Fecha')?.value,
-          style: 'subheader',
+          columns: [
+            {
+              text: 'Fecha: ' + this.frm_factura.get('Fecha')?.value,
+              style: 'subheader',
+            },
+            {
+              text: 'Cliente: ' + this.frm_factura.get('Clientes_idClientes')?.value,
+              style: 'subheader',
+              alignment: 'right'
+            },
+          ],
         },
         {
-          text: 'Cliente: ' + this.frm_factura.get('Clientes_idClientes')?.value,
-          style: 'subheader',
+          columns: [
+            {
+              text: 'Subtotal: ' + this.frm_factura.get('Sub_total')?.value,
+              style: 'subheader',
+            },
+            {
+              text: 'Subtotal IVA: ' + this.frm_factura.get('Sub_total_iva')?.value,
+              style: 'subheader',
+              alignment: 'right'
+            },
+          ],
         },
         {
-          text: 'Subtotal: ' + this.frm_factura.get('Sub_total')?.value,
-          style: 'subheader',
-        },
-        {
-          text: 'Subtotal IVA: ' + this.frm_factura.get('Sub_total_iva')?.value,
-          style: 'subheader',
-        },
-        {
-          text: 'Valor IVA: ' + this.frm_factura.get('Valor_IVA')?.value,
-          style: 'subheader',
-        },
-        {
-          text: 'Total: ' + this.totalapagar,
-          style: 'subheader',
+          columns: [
+            {
+              text: 'Valor IVA: ' + this.frm_factura.get('Valor_IVA')?.value,
+              style: 'subheader',
+            },
+            {
+              text: 'Total: ' + this.totalapagar,
+              style: 'subheader',
+              alignment: 'right'
+            },
+          ],
         },
         {
           text: 'Productos',
@@ -91,9 +139,16 @@ export class NuevafacturaComponent implements OnInit {
         {
           table: {
             headerRows: 1,
-            widths: ['*', '*', '*', '*', '*', '*'],
+            widths: ['*', 'auto', 'auto', 'auto', 'auto', 'auto'],
             body: [
-              ['Descripcion', 'Cantidad', 'Precio', 'Subtotal', 'IVA', 'Total'],
+              [
+                { text: 'Descripción', style: 'tableHeader' },
+                { text: 'Cantidad', style: 'tableHeader' },
+                { text: 'Precio', style: 'tableHeader' },
+                { text: 'Subtotal', style: 'tableHeader' },
+                { text: 'IVA', style: 'tableHeader' },
+                { text: 'Total', style: 'tableHeader' },
+              ],
               ...this.productoelejido.map((producto) => [
                 producto.Descripcion,
                 producto.Cantidad,
@@ -104,6 +159,7 @@ export class NuevafacturaComponent implements OnInit {
               ]),
             ],
           },
+          layout: 'lightHorizontalLines', // Agrega líneas horizontales para mejorar la legibilidad
         },
       ],
       styles: {
@@ -111,6 +167,7 @@ export class NuevafacturaComponent implements OnInit {
           fontSize: 18,
           bold: true,
           margin: [0, 0, 0, 10],
+          alignment: 'center', // Centra el texto del encabezado
         },
         subheader: {
           fontSize: 16,
@@ -121,13 +178,18 @@ export class NuevafacturaComponent implements OnInit {
           bold: true,
           fontSize: 13,
           color: 'black',
+          alignment: 'center',
         },
       },
     };
     
     // Crear el PDF y guardarlo
-    pdfMake.createPdf(DATA).download('reporte.pdf');
+    pdfMake.createPdf(DATA).download('factura.pdf');
     
+    
+
+    //pdf copn html2canva
+
     /*const DATA: any = document.getElementById('impresion');
     html2canvas(DATA).then((html) => {
       const anchoorignal = html.width;
@@ -142,7 +204,6 @@ export class NuevafacturaComponent implements OnInit {
       pdf.addImage(constenido, 'PNG', 0, posicion, imgAncho, imgAlto);
       pdf.save('factura.pdf');
     });
-    /*
     /* pdf con jspdf
     const doc = new jsPDF();
     doc.text('Lista de prodcutos', 10, 10);
@@ -169,14 +230,12 @@ export class NuevafacturaComponent implements OnInit {
       Sub_total_iva: this.frm_factura.get('Sub_total_iva')?.value,
       Valor_IVA: this.frm_factura.get('Valor_IVA')?.value,
       Clientes_idClientes: this.frm_factura.get('Clientes_idClientes')?.value
-      
     };
 
     this.facturaService.insertar(factura).subscribe((respuesta) => {
       if (parseInt(respuesta) > 0) {
         alert('Factura grabada');
         this.navegacion.navigate(['/facturas']);
-        
       }
     });*/
   }
@@ -191,5 +250,27 @@ export class NuevafacturaComponent implements OnInit {
   cambio(objetoSleect: any) {
     let idCliente = objetoSleect.target.value;
     this.frm_factura.get('Clientes_idClientes')?.setValue(idCliente);
+  }
+  productosLista(evnto) {
+    alert('lista de prductos cargandp');
+    //servicio de prodcuto para cargar los productos
+  }
+  cargaModal(valoresModal: any) {
+    //productoelejido
+
+    const nuevoProducto: any = {
+      Descripcion: 'prodcuto 4',
+      Cantidad: 15,
+      Precio: 12.23,
+      Subtotal: 15.2,
+      IVA: 15,
+      Total: 185.9
+    };
+    this.productoelejido.push(nuevoProducto);
+    this.modal.dismissAll();
+
+    this.productoelejido.reduce((valor, producto) => {
+      this.totalapagar += producto.Total;
+    }, 0);
   }
 }
