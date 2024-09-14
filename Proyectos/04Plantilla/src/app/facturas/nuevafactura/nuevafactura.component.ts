@@ -8,8 +8,11 @@ import { ICliente } from 'src/app/Interfaces/icliente';
 import { ClientesService } from 'src/app/Services/clientes.service';
 import { FacturaService } from 'src/app/Services/factura.service';
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
-import html2canvas from 'html2canvas';
+//import 'jspdf-autotable';
+//import html2canvas from 'html2canvas';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfMake.vfs;
 
 @Component({
   selector: 'app-nuevafactura',
@@ -52,6 +55,8 @@ export class NuevafacturaComponent implements OnInit {
       Total: 2000
     }
   ];
+imprimir: any;
+print: any;
 
   ///////
   constructor(
@@ -82,9 +87,82 @@ export class NuevafacturaComponent implements OnInit {
   }
 
   grabar() {
-    //pdf copn html2canva
-
-    const DATA: any = document.getElementById('impresion');
+    //PDF CON PDF MAKER
+    const DATA: any = {
+      content: [
+        {
+          text: 'Factura',
+          style: 'header',
+        },
+        {
+          text: 'Fecha: ' + this.frm_factura.get('Fecha')?.value,
+          style: 'subheader',
+        },
+        {
+          text: 'Cliente: ' + this.frm_factura.get('Clientes_idClientes')?.value,
+          style: 'subheader',
+        },
+        {
+          text: 'Subtotal: ' + this.frm_factura.get('Sub_total')?.value,
+          style: 'subheader',
+        },
+        {
+          text: 'Subtotal IVA: ' + this.frm_factura.get('Sub_total_iva')?.value,
+          style: 'subheader',
+        },
+        {
+          text: 'Valor IVA: ' + this.frm_factura.get('Valor_IVA')?.value,
+          style: 'subheader',
+        },
+        {
+          text: 'Total: ' + this.totalapagar,
+          style: 'subheader',
+        },
+        {
+          text: 'Productos',
+          style: 'header',
+        },
+        {
+          table: {
+            headerRows: 1,
+            widths: ['*', '*', '*', '*', '*', '*'],
+            body: [
+              ['Descripcion', 'Cantidad', 'Precio', 'Subtotal', 'IVA', 'Total'],
+              ...this.productoelejido.map((producto) => [
+                producto.Descripcion,
+                producto.Cantidad,
+                producto.Precio,
+                producto.Subtotal,
+                producto.IVA,
+                producto.Total,
+              ]),
+            ],
+          },
+        },
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 0, 0, 10],
+        },
+        subheader: {
+          fontSize: 16,
+          bold: true,
+          margin: [0, 10, 0, 5],
+        },
+        tableHeader: {
+          bold: true,
+          fontSize: 13,
+          color: 'black',
+        },
+      },
+    };
+    
+    // Crear el PDF y guardarlo
+    pdfMake.createPdf(DATA).download('reporte.pdf');
+    
+    /*const DATA: any = document.getElementById('impresion');
     html2canvas(DATA).then((html) => {
       const anchoorignal = html.width;
       const altooriginal = html.height;
@@ -98,6 +176,7 @@ export class NuevafacturaComponent implements OnInit {
       pdf.addImage(constenido, 'PNG', 0, posicion, imgAncho, imgAlto);
       pdf.save('factura.pdf');
     });
+    /*
     /* pdf con jspdf
     const doc = new jsPDF();
     doc.text('Lista de prodcutos', 10, 10);
