@@ -7,12 +7,6 @@ import { IFactura } from 'src/app/Interfaces/factura';
 import { ICliente } from 'src/app/Interfaces/icliente';
 import { ClientesService } from 'src/app/Services/clientes.service';
 import { FacturaService } from 'src/app/Services/factura.service';
-import jsPDF from 'jspdf';
-//import 'jspdf-autotable';
-//import html2canvas from 'html2canvas';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-pdfMake.vfs = pdfMake.vfs;
 
 @Component({
   selector: 'app-nuevafactura',
@@ -29,34 +23,6 @@ export class NuevafacturaComponent implements OnInit {
   totalapagar: number = 0;
   //formgroup
   frm_factura: FormGroup;
-  productoelejido: any[] = [
-    {
-      Descripcion: 'Producto 1',
-      Cantidad: 2,
-      Precio: 1000,
-      Subtotal: 2000,
-      IVA: 12,
-      Total: 2000
-    },
-    {
-      Descripcion: 'Producto 2',
-      Cantidad: 2,
-      Precio: 1000,
-      Subtotal: 2000,
-      IVA: 12,
-      Total: 2000
-    },
-    {
-      Descripcion: 'Producto 3',
-      Cantidad: 2,
-      Precio: 1000,
-      Subtotal: 2000,
-      IVA: 12,
-      Total: 2000
-    }
-  ];
-imprimir: any;
-print: any;
 
   ///////
   constructor(
@@ -203,12 +169,14 @@ print: any;
       Sub_total_iva: this.frm_factura.get('Sub_total_iva')?.value,
       Valor_IVA: this.frm_factura.get('Valor_IVA')?.value,
       Clientes_idClientes: this.frm_factura.get('Clientes_idClientes')?.value
+      
     };
 
     this.facturaService.insertar(factura).subscribe((respuesta) => {
       if (parseInt(respuesta) > 0) {
         alert('Factura grabada');
         this.navegacion.navigate(['/facturas']);
+        
       }
     });*/
   }
@@ -223,27 +191,5 @@ print: any;
   cambio(objetoSleect: any) {
     let idCliente = objetoSleect.target.value;
     this.frm_factura.get('Clientes_idClientes')?.setValue(idCliente);
-  }
-  productosLista(evnto) {
-    alert('lista de prductos cargandp');
-    //servicio de prodcuto para cargar los productos
-  }
-  cargaModal(valoresModal: any) {
-    //productoelejido
-
-    const nuevoProducto: any = {
-      Descripcion: 'prodcuto 4',
-      Cantidad: 15,
-      Precio: 12.23,
-      Subtotal: 15.2,
-      IVA: 15,
-      Total: 185.9
-    };
-    this.productoelejido.push(nuevoProducto);
-    this.modal.dismissAll();
-
-    this.productoelejido.reduce((valor, producto) => {
-      this.totalapagar += producto.Total;
-    }, 0);
   }
 }

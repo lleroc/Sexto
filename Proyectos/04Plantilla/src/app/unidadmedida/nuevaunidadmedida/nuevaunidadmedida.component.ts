@@ -28,6 +28,12 @@ export class NuevaunidadmedidaComponent implements OnInit {
       Tipo: new FormControl('', [Validators.required])
     });
   }
+  actualizar(objeto: IUnidadMedida) {
+    this.titulo = 'Modificar Unidad de Medida';
+    this.idUnidadMedida = objeto.idUnidad_Medida;
+    this.frm_UnidadMedida.get('Detalle')?.setValue(objeto.Detalle);
+    this.frm_UnidadMedida.get('Tipo')?.setValue(objeto.Tipo);
+  }
 
   cambio(objetoSleect: any) {
     this.frm_UnidadMedida.get('Tipo')?.setValue(objetoSleect.target.value);
@@ -37,6 +43,7 @@ export class NuevaunidadmedidaComponent implements OnInit {
       Detalle: this.frm_UnidadMedida.get('Detalle')?.value,
       Tipo: this.frm_UnidadMedida.get('Tipo')?.value
     };
+    console.log(this.idUnidadMedida);
     if (this.idUnidadMedida == 0) {
       this.unidadService.insertar(unidadmedida).subscribe((x) => {
         Swal.fire('Exito', 'La unidad de medida se grabo con exito', 'success');
