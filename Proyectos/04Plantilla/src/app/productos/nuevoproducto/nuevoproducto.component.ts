@@ -63,5 +63,11 @@ export class NuevoproductoComponent implements OnInit {
     });
   }
 
-  grabar() {}
+  grabar() {
+    console.log(this.frm_Producto.value);
+    this.frm_Producto.reset();
+    //this.frm_Producto.resetForm();
+    //this.frm_Producto.resetForm();
+    //this.frm_Producto.resetForm();
+  }
 }

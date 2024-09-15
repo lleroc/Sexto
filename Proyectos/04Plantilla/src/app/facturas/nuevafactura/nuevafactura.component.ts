@@ -8,8 +8,11 @@ import { ICliente } from 'src/app/Interfaces/icliente';
 import { ClientesService } from 'src/app/Services/clientes.service';
 import { FacturaService } from 'src/app/Services/factura.service';
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
-import html2canvas from 'html2canvas';
+//import 'jspdf-autotable';
+//import html2canvas from 'html2canvas';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-nuevafactura',
@@ -82,9 +85,112 @@ export class NuevafacturaComponent implements OnInit {
   }
 
   grabar() {
+
+    //PDF CON PDFMAKER
+    const DATA: any = {
+      content: [
+        {
+          text: 'Factura',
+          style: 'header',
+        },
+        {
+          columns: [
+            {
+              text: 'Fecha: ' + this.frm_factura.get('Fecha')?.value,
+              style: 'subheader',
+            },
+            {
+              text: 'Cliente: ' + this.frm_factura.get('Clientes_idClientes')?.value,
+              style: 'subheader',
+              alignment: 'right'
+            },
+          ],
+        },
+        {
+          columns: [
+            {
+              text: 'Subtotal: ' + this.frm_factura.get('Sub_total')?.value,
+              style: 'subheader',
+            },
+            {
+              text: 'Subtotal IVA: ' + this.frm_factura.get('Sub_total_iva')?.value,
+              style: 'subheader',
+              alignment: 'right'
+            },
+          ],
+        },
+        {
+          columns: [
+            {
+              text: 'Valor IVA: ' + this.frm_factura.get('Valor_IVA')?.value,
+              style: 'subheader',
+            },
+            {
+              text: 'Total: ' + this.totalapagar,
+              style: 'subheader',
+              alignment: 'right'
+            },
+          ],
+        },
+        {
+          text: 'Productos',
+          style: 'header',
+        },
+        {
+          table: {
+            headerRows: 1,
+            widths: ['*', 'auto', 'auto', 'auto', 'auto', 'auto'],
+            body: [
+              [
+                { text: 'Descripción', style: 'tableHeader' },
+                { text: 'Cantidad', style: 'tableHeader' },
+                { text: 'Precio', style: 'tableHeader' },
+                { text: 'Subtotal', style: 'tableHeader' },
+                { text: 'IVA', style: 'tableHeader' },
+                { text: 'Total', style: 'tableHeader' },
+              ],
+              ...this.productoelejido.map((producto) => [
+                producto.Descripcion,
+                producto.Cantidad,
+                producto.Precio,
+                producto.Subtotal,
+                producto.IVA,
+                producto.Total,
+              ]),
+            ],
+          },
+          layout: 'lightHorizontalLines', // Agrega líneas horizontales para mejorar la legibilidad
+        },
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          margin: [0, 0, 0, 10],
+          alignment: 'center', // Centra el texto del encabezado
+        },
+        subheader: {
+          fontSize: 16,
+          bold: true,
+          margin: [0, 10, 0, 5],
+        },
+        tableHeader: {
+          bold: true,
+          fontSize: 13,
+          color: 'black',
+          alignment: 'center',
+        },
+      },
+    };
+    
+    // Crear el PDF y guardarlo
+    pdfMake.createPdf(DATA).download('factura.pdf');
+    
+    
+
     //pdf copn html2canva
 
-    const DATA: any = document.getElementById('impresion');
+    /*const DATA: any = document.getElementById('impresion');
     html2canvas(DATA).then((html) => {
       const anchoorignal = html.width;
       const altooriginal = html.height;
